@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-if os.environ.get('VERCEL') is None:
+if os.environ.get('VERCEL_ENV') is None:
     load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
