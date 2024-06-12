@@ -1,12 +1,111 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for group in groups %}
-        <li>{{ group.group.metaData.groupName }}</li>
-        {% for team in group.items %}
-            <img src="{{team.team.logoUrl}}" alt="logo">
-            <span>{{ team.team.internationalName }}</span>
-            <br>
-        {% endfor %}
-    {% endfor %}
+    <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div class="row" id="short_info">
+            {% for group in groups %}
+                <div class="col-4">
+                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
+                        <div class="card-body">
+                            <p style="font-size: xx-large; font-weight: 600;">{{ group.group.metaData.groupName }}</p>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col" style="text-align: left"></th>
+                                    <th scope="col">MP</th>
+                                    <th scope="col">W</th>
+                                    <th scope="col">D</th>
+                                    <th scope="col">L</th>
+                                    <th scope="col">Pts</th>
+                                  </tr>
+                                </thead>
+                                <tbody>                                  
+                                    {% for team in group.items %}
+                                        <tr>
+                                            <td style="text-align: left">
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="{{team.team.logoUrl}}" style="height: 1.25rem" alt="logo">
+                                                    <span style="margin-left: 5px">{{ team.team.internationalName }}</span>
+                                                </div>  
+                                            </td>
+                                            <td>{{team.played}}</td>
+                                            <td>{{team.won}}</td>
+                                            <td>{{team.drawn}}</td>
+                                            <td>{{team.lost}}</td>
+                                            <td>{{team.points}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row d-none" id="long_info">
+            {% for group in groups %}
+                <div class="col-12">
+                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
+                        <div class="card-body">
+                            <p style="font-size: xx-large; font-weight: 600; text-align: left; margin-bottom: 2rem">{{ group.group.metaData.groupName }}</p>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col" style="text-align: left">Team</th>
+                                    <th scope="col">Played</th>
+                                    <th scope="col">Won</th>
+                                    <th scope="col">Drawn</th>
+                                    <th scope="col">Lost</th>
+                                    <th scope="col">For</th>
+                                    <th scope="col">Against</th>
+                                    <th scope="col">Goal Diff</th>
+                                    <th scope="col">Points</th>
+                                  </tr>
+                                </thead>
+                                <tbody>                                  
+                                    {% for team in group.items %}
+                                        <tr>
+                                            <th scope="row">{{team.rank}}</th>
+                                            <td style="text-align: left">
+                                                <div style="display: flex; align-items: center; max-width: 2rem;">
+                                                    <img src="{{team.team.logoUrl}}" style="height: 1.25rem" alt="logo">
+                                                    <span style="margin-left: 5px">{{ team.team.internationalName }}</span>
+                                                </div>  
+                                            </td>
+                                            <td>{{team.played}}</td>
+                                            <td>{{team.won}}</td>
+                                            <td>{{team.drawn}}</td>
+                                            <td>{{team.lost}}</td>
+                                            <td>{{team.goalsFor}}</td>
+                                            <td>{{team.goalsAgainst}}</td>
+                                            <td>{{team.goalDifference}}</td>
+                                            <td>{{team.points}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                              </table>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <button id="change_button" type="button" onclick="showDetail()" class="btn btn-primary">Show more</button>
+        </div>
+    </div>
+
+    <script>
+        function showDetail() {
+            document.getElementById("short_info").classList.toggle('d-none');
+            document.getElementById("long_info").classList.toggle('d-none');
+
+            if (document.getElementById("change_button").innerHTML == "Show more") {
+                document.getElementById("change_button").innerHTML = "Show less";
+            } else {
+                document.getElementById("change_button").innerHTML = "Show more";
+            }
+        }
+    </script>
+
 {% endblock %}

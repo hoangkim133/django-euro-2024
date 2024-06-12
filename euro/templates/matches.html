@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div class="row" id="short_info">
+            {% for match in matches %}
+                <div class="col-6">
+                    <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
+                        <div class="card-body">
+                            <p style="text-align: left; color: grey">{{ match.group.metaData.groupName}}</p>
+                            <div style="display: flex; justify-content: space-between;">
+                                <div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 1rem">
+                                        <img src="{{match.homeTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
+                                        <span style="margin-left: 10px; font-size: xx-large;";>{{ match.homeTeam.internationalName }}</span>
+                                    </div>  
+                                    <div style="display: flex; align-items: center;">
+                                        <img src="{{match.awayTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
+                                        <span style="margin-left: 10px; font-size: xx-large;">{{ match.awayTeam.internationalName }}</span>
+                                    </div>  
+                                </div>
+                                <div style="border-left: solid 1px grey; padding-left: 2rem; padding-right: 2rem; align-content: center;">
+                                    <p style="font-size: large; font-weight: 200; margin-bottom: 0">{{ match.kickOffTime.dateTime}}</p>
+                                    <p style="font-size: xx-large; font-weight: 600;">{{ match.kickOffTime.time}}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
