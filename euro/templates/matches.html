@@ -41,7 +41,8 @@
                                         
                                     {% endif %} 
 
-                                    <div style="border-left: solid 1px grey; padding-left: 2rem; padding-right: 2rem; align-content: center;">
+                                    <div style="width: 11rem; border-left: solid 1px grey; padding-left: 2rem; padding-right: 2rem; align-content: center; display: grid;
+                                    justify-content: center;">
                                         {% if match.status == 'LIVE' %}
                                             {% if match.phase == 'HALF_TIME_BREAK' %}
                                                 <p style="color: grey">Half-time</p>
@@ -49,7 +50,7 @@
                                                 <p style="color: green">{{match.minute.normal}}'</p>
                                             {% endif %} 
                                            
-                                            <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem; display: flex; align-items: center">
+                                            <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem; display: flex; align-items: center; ">
                                                 <div style="width: 10px; height: 10px; background: red; border-radius: 5px"></div>
                                                 &nbsp;LIVE
                                             </div>
