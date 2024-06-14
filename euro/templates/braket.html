@@ -36,7 +36,8 @@
         </div>
         <div class="col" style="display: grid">
             {% for match in quarter %}
-                <div style="margin-bottom: 1rem; align-content: center;">
+                <div style="margin-bottom: 1rem; align-content: center; position: relative;">
+                    <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
                         <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
@@ -53,7 +54,8 @@
         </div>
         <div class="col" style="display: grid">
             {% for match in semi %}
-                <div style="margin-bottom: 1rem; align-content: center;">
+                <div style="margin-bottom: 1rem; align-content: center; position: relative;">
+                    <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
                         <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
@@ -69,8 +71,16 @@
             {% endfor %}
         </div>
         <div class="col" style="display: grid">
-            <div style="margin-bottom: 1rem; align-content: center;">
-                <div class="match-tag">
+            <div style="margin-bottom: 1rem; align-content: center; position: relative;">
+                <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
+                <div class="match-tag" style="position: relative;">
+                    <div style="
+                        position: absolute;
+                        left: calc(50% - 40px);
+                        bottom: 110%;
+                    ">
+                        <img loading="lazy" src="https://img.uefa.com/imgml/uefacom/euro2024/trophy/trophy_small.png?imwidth=700">
+                    </div>
                     <p style="font-size: 15px; color: grey">{{final.kickOffTime.timeBraket}}</p>
                     <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
                         <img src="{{final.homeTeam.logoUrl}}" style="height: 1.5rem" alt="logo">

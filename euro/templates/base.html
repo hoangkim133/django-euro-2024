@@ -24,6 +24,36 @@
       .match-tag p {
         margin-bottom: 0.5rem
       }
+
+      .braket-line {
+        height: 50%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 25%;
+        width: calc(100% - 12rem + 1.5rem);
+        left: calc(-100% + 12rem - 1.5rem);
+        border-top: solid 2px;
+        border-bottom: solid 2px;
+        border-image: linear-gradient(to right, #dedede 50%, transparent 50%) 100% 1;
+      }
+
+      .braket-line-row {
+        border: solid 1px #dedede;
+        width: 50%;
+        height: 0;
+        position: absolute;
+        right: 0;
+      }
+
+      .braket-line-col {
+        border-left: solid 2px #dedede;
+        border-right: solid transparent 2px;
+        width: 0%;
+        height: 100%;
+        position: absolute;
+      }
     </style>
 </head>
 
