@@ -11,7 +11,19 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <style>
+      .match-tag {
+        height: max-content;
+        border: solid 1px #dedede;
+        border-radius: 10px;
+        background: white;
+        text-align: left;
+        padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+        max-width: 12rem;
+      }
 
+      .match-tag p {
+        margin-bottom: 0.5rem
+      }
     </style>
 </head>
 
@@ -36,6 +48,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/matches">Matches</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/braket">Braket</a>
+            </li>
           </ul>
         </form>
       </div>
@@ -49,7 +64,7 @@
       width: 100%;
       z-index: -1;"
     ></div>
-    <div id="content" style="padding: 2rem; padding-top: 20vh; ">
+    <div id="content" style="padding: 2rem; padding-top: 13vh; ">
         {% block content %}{% endblock %}
     </div>
 </body>

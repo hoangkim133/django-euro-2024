@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center" style="background: whitesmoke; padding: 2rem 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="row" style="margin-bottom: 1.5rem">
+        <div class="col">
+            <p style="border-top: solid 0.5px #a0a0a0; padding-top: 0.5rem; color: #a0a0a0">ROUND OF 16</p>
+        </div>
+        <div class="col">
+            <p style="border-top: solid 0.5px #a0a0a0; padding-top: 0.5rem; color: #a0a0a0">QUARTER FINALS</p>
+        </div>
+        <div class="col">
+            <p style="border-top: solid 0.5px #a0a0a0; padding-top: 0.5rem; color: #a0a0a0">SEMI FINALS</p>
+        </div>
+        <div class="col">
+            <p style="border-top: solid 0.5px #a0a0a0; padding-top: 0.5rem; color: #a0a0a0">FINALS</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="display: grid">
+            {% for match in round16 %}
+                <div style="margin-bottom: 1rem; align-content: center;">
+                    <div class="match-tag">
+                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
+                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        </div> 
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
+                        </div>  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col" style="display: grid">
+            {% for match in quarter %}
+                <div style="margin-bottom: 1rem; align-content: center;">
+                    <div class="match-tag">
+                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
+                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        </div> 
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
+                        </div>  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col" style="display: grid">
+            {% for match in semi %}
+                <div style="margin-bottom: 1rem; align-content: center;">
+                    <div class="match-tag">
+                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
+                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        </div> 
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
+                        </div>  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col" style="display: grid">
+            <div style="margin-bottom: 1rem; align-content: center;">
+                <div class="match-tag">
+                    <p style="font-size: 15px; color: grey">{{final.kickOffTime.timeBraket}}</p>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
+                        <img src="{{final.homeTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
+                        <span style="margin-left: 10px; font-size: large;";>{{ final.homeTeam.internationalName }}</span>
+                    </div> 
+                    <div style="display: flex; align-items: center;">
+                        <img src="{{final.awayTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
+                        <span style="margin-left: 10px; font-size: large;">{{ final.awayTeam.internationalName }}</span>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="border-top: solid 1px grey; margin: 3rem 0 3rem 0"></div>
+    <div class="row">
+        {% for match in matches %}
+            <div class="col-6">
+                <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
+                    <div class="card-body">
+                        <p style="text-align: left; color: grey">{{ match.round.metaData.name}}</p>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div>
+                                <div style="display: flex; align-items: center; margin-bottom: 1rem">
+                                    <img src="{{match.homeTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
+                                    <span style="margin-left: 10px; font-size: xx-large;";>{{ match.homeTeam.internationalName }}</span>
+                                </div>  
+                                <div style="display: flex; align-items: center;">
+                                    <img src="{{match.awayTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
+                                    <span style="margin-left: 10px; font-size: xx-large;">{{ match.awayTeam.internationalName }}</span>
+                                </div>  
+                            </div>
+                            <div style="border-left: solid 1px grey; padding-left: 2rem; padding-right: 2rem; align-content: center;">
+                                <p style="font-size: large; font-weight: 200; margin-bottom: 0">{{ match.kickOffTime.dateTime}}</p>
+                                <p style="font-size: xx-large; font-weight: 600;">{{ match.kickOffTime.time}}</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}

@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.getGroup),
     path('matches', views.getMatches),
+    path('braket', views.getBraketview),
 ]

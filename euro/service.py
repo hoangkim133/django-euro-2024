@@ -56,6 +56,25 @@ def getEuroMatches():
     return json.loads(response.text)
 
 
+def getEuroBraket():
+    url = "https://match.uefa.com/v5/matches?competitionId=3&limit=55&matchType=FIRST_LEG%2CREPLAY%2CSECOND_LEG%2CSINGLE&offset=0&phase=TOURNAMENT&seasonYear=2024"
+
+    payload = {}
+    headers = {
+        'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'Accept': 'application/json, text/plain, */*',
+        'Referer': 'https://www.uefa.com/',
+        'sec-ch-ua-mobile': '?0',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'x-api-key': 'ceeee1a5bb209502c6c438abd8f30aef179ce669bb9288f2d1cf2fa276de03f4',
+        'sec-ch-ua-platform': '"macOS"'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    return json.loads(response.text)
+
+
 def convert_time_between_offsets(datetime_str, from_offset=2, to_offset=7):
     date = datetime.fromisoformat(datetime_str.rstrip('Z'))
     new_date = date + timedelta(hours=to_offset)
