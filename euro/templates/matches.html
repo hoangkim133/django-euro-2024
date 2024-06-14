@@ -33,7 +33,12 @@
 
                                     <div style="border-left: solid 1px grey; padding-left: 2rem; padding-right: 2rem; align-content: center;">
                                         {% if match.status == 'LIVE' %}
-                                            <p style="color: green">{{match.minute.normal}}'</p>
+                                            {% if match.phase == 'HALF_TIME_BREAK' %}
+                                                <p style="color: grey">Half-time</p>
+                                            {% else %}
+                                                <p style="color: green">{{match.minute.normal}}'</p>
+                                            {% endif %} 
+                                           
                                             <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem; display: flex; align-items: center">
                                                 <div style="width: 10px; height: 10px; background: red; border-radius: 5px"></div>
                                                 &nbsp;LIVE
