@@ -13,10 +13,20 @@
                                     <div style="display: flex; align-items: center; margin-bottom: 1rem">
                                         <img src="{{match.homeTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
                                         <span style="margin-left: 10px; font-size: xx-large;";>{{ match.homeTeam.internationalName }}</span>
+                                        {% if match.status == 'LIVE' %}
+                                            {% if match.homeTeam.redCard %}
+                                                <div style="background: red; border-radius: 4px; height: 35px; width: 25px; margin-left: 0.75rem"></div>
+                                            {% endif %} 
+                                        {% endif %} 
                                     </div>  
                                     <div style="display: flex; align-items: center;">
                                         <img src="{{match.awayTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
                                         <span style="margin-left: 10px; font-size: xx-large;">{{ match.awayTeam.internationalName }}</span>
+                                        {% if match.status == 'LIVE' %}
+                                            {% if match.awayTeam.redCard %}
+                                                <div style="background: red; border-radius: 4px; height: 35px; width: 25px; margin-left: 0.75rem"></div>
+                                            {% endif %} 
+                                        {% endif %} 
                                     </div>  
                                 </div>
                                 <div style="display: flex">

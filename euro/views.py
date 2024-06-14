@@ -20,6 +20,15 @@ def getMatches(request):
         match["kickOffTime"]["dateTime"] = value.strftime("%a, %B %d")
         match["kickOffTime"]["time"] = value.strftime("%H:%M")
 
+        if 'playerEvents' in match:
+            if 'redCards' in match['playerEvents']:
+                for redCard in match['playerEvents']['redCards']:
+                    if redCard['teamId'] == match['awayTeam']['id']:
+                        match['awayTeam']['redCard'] = True
+
+                    if redCard['teamId'] == match['homeTeam']['id']:
+                        match['homeTeam']['redCard'] = True
+
     return render(request, 'matches.html', {'matches': matches})
 
 
