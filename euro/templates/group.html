@@ -61,6 +61,7 @@
                                     <th scope="col">Against</th>
                                     <th scope="col">Goal Diff</th>
                                     <th scope="col">Points</th>
+                                    <th scope="col">Form Guide</th>
                                   </tr>
                                 </thead>
                                 <tbody>                                  
@@ -81,6 +82,27 @@
                                             <td>{{team.goalsAgainst}}</td>
                                             <td>{{team.goalDifference}}</td>
                                             <td>{{team.points}}</td>
+                                            <td>
+                                                <div style="display: flex; justify-content: center; align-items: center">
+                                                    {% if team.formGuide %}
+                                                        {% for form in team.formGuide %}
+                                                            {% if form == "N" %}
+                                                                <div class='circle-none'></div>
+                                                            {% elif form == "W" %}
+                                                                <div class='circle-win'></div>
+                                                            {% elif form == "L" %}
+                                                                <div class='circle-lost'></div>
+                                                            {% elif form == "D" %}
+                                                                <div class='circle-draw'></div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div class='circle-none'></div>
+                                                        <div class='circle-none'></div>
+                                                        <div class='circle-none'></div>
+                                                    {% endif %} 
+                                                </div>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>

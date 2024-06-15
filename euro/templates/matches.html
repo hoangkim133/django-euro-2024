@@ -50,7 +50,11 @@
                                             {% if match.phase == 'HALF_TIME_BREAK' %}
                                                 <p style="color: grey">Half-time</p>
                                             {% else %}
-                                                <p style="color: green">{{match.minute.normal}}'</p>
+                                                {% if match.minute.injury %}
+                                                    <p style="color: green">{{match.minute.normal}}'+{{match.minute.injury}}'</p>
+                                                {% else %}
+                                                    <p style="color: green">{{match.minute.normal}}'</p>
+                                                {% endif %} 
                                             {% endif %} 
                                            
                                             <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem; display: flex; align-items: center; ">

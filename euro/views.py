@@ -8,6 +8,58 @@ from . import service
 def getGroup(request):
     groups = service.getEuroGroup()
 
+    for group in groups:
+        groupId = group["group"]["id"]
+        formGuide = service.getEuroFormGuide(groupId)
+
+        dict_formGuide = {}
+        for match in formGuide:
+            homeId = match['homeTeam']['id']
+            awayId = match['awayTeam']['id']
+
+            if match['status'] == 'FINISHED':
+                homeScore = match['score']['total']['home']
+                awayScore = match['score']['total']['away']
+
+                if homeScore > awayScore:
+                    if homeId in dict_formGuide:
+                        dict_formGuide[homeId].append("W")
+                    else:
+                        dict_formGuide[homeId] = ["W"]
+
+                    if awayId in dict_formGuide:
+                        dict_formGuide[awayId].append("L")
+                    else:
+                        dict_formGuide[awayId] = ["L"]
+                elif homeScore < awayScore:
+                    if homeId in dict_formGuide:
+                        dict_formGuide[homeId].append("L")
+                    else:
+                        dict_formGuide[homeId] = ["L"]
+
+                    if awayId in dict_formGuide:
+                        dict_formGuide[awayId].append("W")
+                    else:
+                        dict_formGuide[awayId] = ["W"]
+                elif homeScore == awayScore:
+                    if homeId in dict_formGuide:
+                        dict_formGuide[homeId].append("D")
+                    else:
+                        dict_formGuide[homeId] = ["D"]
+
+                    if awayId in dict_formGuide:
+                        dict_formGuide[awayId].append("D")
+                    else:
+                        dict_formGuide[awayId] = ["D"]
+
+        for team in group['items']:
+            lst_form = dict_formGuide.get(team['team']['id'])
+            if lst_form:
+                while len(lst_form) < 3:
+                    lst_form.insert(0, "N")
+
+            team['formGuide'] = lst_form
+
     return render(request, 'group.html', {'groups': groups})
 
 
