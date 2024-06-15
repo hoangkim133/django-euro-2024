@@ -89,6 +89,16 @@
         margin: 0 2px 0 2px;
         background: red;
       }
+
+      .live-dot {
+        animation-name: blink;
+        animation-duration: 0.5s;
+        animation-iteration-count: infinite;
+      }
+      
+      @keyframes blink {
+        50% {opacity: 0;}
+      }
     </style>
 </head>
 
