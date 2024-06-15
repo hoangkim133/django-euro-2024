@@ -13,7 +13,7 @@
                                     <div style="display: flex; align-items: center; margin-bottom: 1rem">
                                         <img src="{{match.homeTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
                                         <span style="margin-left: 10px; font-size: xx-large;";>{{ match.homeTeam.internationalName }}</span>
-                                        {% if match.status == 'LIVE' %}
+                                        {% if match.status == 'LIVE' or match.status == 'FINISHED' %}
                                             {% if match.homeTeam.redCard %}
                                                 <div style="background: red; border-radius: 4px; height: 35px; width: 25px; margin-left: 0.75rem"></div>
                                             {% endif %} 
@@ -22,7 +22,7 @@
                                     <div style="display: flex; align-items: center;">
                                         <img src="{{match.awayTeam.logoUrl}}" style="height: 2.5rem" alt="logo">
                                         <span style="margin-left: 10px; font-size: xx-large;">{{ match.awayTeam.internationalName }}</span>
-                                        {% if match.status == 'LIVE' %}
+                                        {% if match.status == 'LIVE' or match.status == 'FINISHED' %}
                                             {% if match.awayTeam.redCard %}
                                                 <div style="background: red; border-radius: 4px; height: 35px; width: 25px; margin-left: 0.75rem"></div>
                                             {% endif %} 
@@ -35,8 +35,11 @@
                                         <p>{{match.score.regular.home}}</p>
                                         <p style="margin-bottom: 0">{{match.score.regular.away}}</p>
                                     </div>
-                                    {% elif match.status == '' %}
-                                        
+                                    {% elif match.status == 'FINISHED' %}
+                                    <div style="background: transparent; padding: 0.5rem; border-radius: 0.25rem; display: grid; font-size: x-large; font-weight: 700; align-items: center; margin-right: 2rem">
+                                        <p>{{match.score.regular.home}}</p>
+                                        <p style="margin-bottom: 0">{{match.score.regular.away}}</p>
+                                    </div>
                                     {% else %}
                                         
                                     {% endif %} 
@@ -57,6 +60,9 @@
                                         {% elif match.status == 'UPCOMING' %}
                                             <p style="font-size: large; font-weight: 200; margin-bottom: 0">{{ match.kickOffTime.dateTime}}</p>
                                             <p style="font-size: xx-large; font-weight: 600;">{{ match.kickOffTime.time}}</p>
+                                        {% elif match.status == 'FINISHED' %}
+                                            <p style="font-size: large; font-weight: 200; margin-bottom: 0">Full time</p>
+                                            <p style="font-size: large; font-weight: 600;">{{ match.kickOffTime.dateTime}}</p>
                                         {% endif %} 
                                     </div>
                                 </div>
