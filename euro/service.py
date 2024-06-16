@@ -32,30 +32,30 @@ def getEuroGroup():
 
 def getEuroFormGuide(groupId):
 
-    url = "https://match.uefa.com/v5/matches?competitionId=3&groupId=" + groupId + "&limit=50&offset=0&order=ASC&seasonYear=2024"
+    url = "https://match.uefa.com/v5/matches?competitionId=3&groupId=" + \
+        groupId + "&limit=50&offset=0&order=ASC&seasonYear=2024"
 
     payload = {}
     headers = {
-    'accept': 'application/json, text/plain, */*',
-    'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
-    'if-none-match': '"0cdbbda4bcf27370b9ce135dbd42ae18c"',
-    'origin': 'https://www.uefa.com',
-    'priority': 'u=1, i',
-    'referer': 'https://www.uefa.com/',
-    'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"macOS"',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-site',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-    'x-api-key': 'ceeee1a5bb209502c6c438abd8f30aef179ce669bb9288f2d1cf2fa276de03f4'
+        'accept': 'application/json, text/plain, */*',
+        'accept-language': 'vi-VN,vi;q=0.9,fr-FR;q=0.8,fr;q=0.7,en-US;q=0.6,en;q=0.5',
+        'if-none-match': '"0cdbbda4bcf27370b9ce135dbd42ae18c"',
+        'origin': 'https://www.uefa.com',
+        'priority': 'u=1, i',
+        'referer': 'https://www.uefa.com/',
+        'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-site',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'x-api-key': 'ceeee1a5bb209502c6c438abd8f30aef179ce669bb9288f2d1cf2fa276de03f4'
     }
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
     return json.loads(response.text)
-
 
 
 def getEuroMatches():
@@ -86,6 +86,25 @@ def getEuroMatches():
 
 def getEuroBraket():
     url = "https://match.uefa.com/v5/matches?competitionId=3&limit=55&matchType=FIRST_LEG%2CREPLAY%2CSECOND_LEG%2CSINGLE&offset=0&phase=TOURNAMENT&seasonYear=2024"
+
+    payload = {}
+    headers = {
+        'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+        'Accept': 'application/json, text/plain, */*',
+        'Referer': 'https://www.uefa.com/',
+        'sec-ch-ua-mobile': '?0',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+        'x-api-key': 'ceeee1a5bb209502c6c438abd8f30aef179ce669bb9288f2d1cf2fa276de03f4',
+        'sec-ch-ua-platform': '"macOS"'
+    }
+
+    response = requests.request("GET", url, headers=headers, data=payload)
+
+    return json.loads(response.text)
+
+
+def getEuroTeam():
+    url = "https://comp.uefa.com/v2/teams?competitionId=3&limit=55&offset=0&phase=ALL&seasonYear=2024"
 
     payload = {}
     headers = {

@@ -2,9 +2,36 @@
 
 {% block content %}
     <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div style="display: flex; padding-top: 2rem">
+            <select id="status_slb" class="form-select" aria-label="status">
+                <option value="all">Trạng thái thi đấu</option>
+                <option value="FINISHED">Đã thi đấu</option>
+                <option value="UPCOMING">Chưa thi đấu</option>
+                <option value="LIVE">Đang thi đấu</option>
+            </select>
+            <select id="groups_slb" class="form-select" aria-label="groups">
+                <option value="all">Bảng</option>
+                {% for group in groups %}
+                    <option value="{{group.group.id}}">
+                        {{group.group.metaData.groupName}}
+                    </option>
+                {% endfor %}
+            </select>
+            <select id="teams_slb" class="form-select" aria-label="teams">
+                <option value="all">Đội</option>
+                {% for team in teams %}
+                    <option value="{{team.id}}">
+                        {{team.emojiCode}} {{team.internationalName}}
+                    </option>
+                {% endfor %}
+            </select>
+            <button style="margin-right: 1rem" onclick="search()" class="btn btn-primary">Search</button>
+            <button onclick="searchTime()" class="btn btn-success">Today</button>
+
+        </div>
         <div class="row">
             {% for match in matches %}
-                <div class="col-6">
+                <div class="match-info col-6" data-date="{{match.kickOffTime.date}}" data-status="{{match.status}}" data-group="{{match.group.id}}" data-teamHome="{{match.homeTeam.id}}" data-teamAway="{{match.awayTeam.id}}">
                     <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
                         <div class="card-body">
                             <p style="text-align: left; color: grey">{{ match.group.metaData.groupName}}</p>
@@ -79,4 +106,63 @@
             {% endfor %}
         </div>
     </div>
+    <script>
+        function search() {
+            var status = document.getElementById("status_slb").value;
+            var groups = document.getElementById("groups_slb").value;
+            var teams = document.getElementById("teams_slb").value;
+
+            var lst_matches = document.getElementsByClassName("match-info");
+            Array.prototype.forEach.call(lst_matches, function(elem) {
+                match_status = elem.getAttribute('data-status');
+                match_group = elem.getAttribute('data-group');
+                match_teamHome = elem.getAttribute('data-teamHome');
+                match_awayTeam = elem.getAttribute("data-teamAway");
+
+                var hidden = true;
+                if (status != "all") {
+                    if (match_status != status){
+                        hidden = false;
+                    }
+                }
+
+                if (groups != "all") {
+                    if (match_group != groups){
+                        hidden = false;
+                    }
+                }
+
+                if (teams != "all") {
+                    if (match_teamHome != teams && match_awayTeam != teams){
+                        hidden = false;
+                    }
+                }
+
+                if (hidden){
+                    elem.classList.remove("d-none");
+                } else {
+                    elem.classList.add("d-none");
+                }
+            });
+        };
+
+        function searchTime() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // getMonth() returns month from 0-11
+            const day = String(today.getDate()).padStart(2, '0');
+            var date = `${year}-${month}-${day}`;
+
+            var lst_matches = document.getElementsByClassName("match-info");
+            Array.prototype.forEach.call(lst_matches, function(elem) {
+                
+                var match_date =  elem.getAttribute("data-date");
+                if (match_date != date) {
+                    if (!elem.classList.contains("d-none")) {
+                        elem.classList.add("d-none");
+                    }
+                }
+            });
+        };
+    </script>
 {% endblock %}

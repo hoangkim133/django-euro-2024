@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.getGroup),
     path('matches', views.getMatches),
     path('braket', views.getBraketview),
+    path('teams', views.getTeam),
 ]

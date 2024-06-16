@@ -3,6 +3,38 @@ from django.http import HttpResponse
 from . import service
 
 # Create your views here.
+country_to_flag = {
+    "GER": "🇩🇪",
+    "SUI": "🇨🇭",
+    "HUN": "🇭🇺",
+    "SCO": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    "ESP": "🇪🇸",
+    "ITA": "🇮🇹",
+    "ALB": "🇦🇱",
+    "CRO": "🇭🇷",
+    "SVN": "🇸🇮",
+    "DEN": "🇩🇰",
+    "SRB": "🇷🇸",
+    "ENG": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "NED": "🇳🇱",
+    "FRA": "🇫🇷",
+    "POL": "🇵🇱",
+    "AUT": "🇦🇹",
+    "UKR": "🇺🇦",
+    "SVK": "🇸🇰",
+    "BEL": "🇧🇪",
+    "ROU": "🇷🇴",
+    "POR": "🇵🇹",
+    "CZE": "🇨🇿",
+    "GEO": "🇬🇪",
+    "TUR": "🇹🇷"
+}
+
+
+def getTeam(request):
+    teams = service.getEuroTeam()
+
+    return render(request, 'teams.html', {'teams': teams})
 
 
 def getGroup(request):
@@ -65,12 +97,12 @@ def getGroup(request):
 
 def getMatches(request):
     matches = service.getEuroMatches()
-    print(matches[0].get("kickOffTime").get("dateTime"))
     for match in matches:
         value = service.convert_time_between_offsets(
             match.get("kickOffTime").get("dateTime"))
         match["kickOffTime"]["dateTime"] = value.strftime("%a, %B %d")
         match["kickOffTime"]["time"] = value.strftime("%H:%M")
+        match["kickOffTime"]["date"] = value.strftime("%Y-%m-%d")
 
         if 'playerEvents' in match:
             if 'redCards' in match['playerEvents']:
@@ -81,7 +113,15 @@ def getMatches(request):
                     if redCard['teamId'] == match['homeTeam']['id']:
                         match['homeTeam']['redCard'] = True
 
-    return render(request, 'matches.html', {'matches': matches})
+    groups = service.getEuroGroup()
+    teams = []
+    for group in groups:
+        for item in group['items']:
+            # print(item['team']['countryCode'])
+            item['team']['emojiCode'] = country_to_flag[item['team']['countryCode']]
+            teams.append(item['team'])
+
+    return render(request, 'matches.html', {'matches': matches, 'teams': teams, 'groups': groups})
 
 
 def getBraketview(request):

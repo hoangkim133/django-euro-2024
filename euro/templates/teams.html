@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div class="row">
+            <table class="table" style="margin-top: 2rem">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Association</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td><img src="{{team.associationLogoUrl}}" style="height: 2rem"></td>
+                            <td>{{team.countryCode}}</td>
+                            <td><img src="{{team.logoUrl}}" style="height: 2rem"></td>
+                            <td><b>{{team.internationalName}}</b></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+{% endblock %}
