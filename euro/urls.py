@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.getGroup),
     path('matches', views.getMatches),
+    path('matches/<str:matchid>/', views.getMatchDetail),
     path('braket', views.getBraketview),
     path('teams', views.getTeam),
     path('stats', views.getStats),

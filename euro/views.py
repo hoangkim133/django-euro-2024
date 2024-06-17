@@ -136,6 +136,12 @@ def getMatches(request):
     return render(request, 'matches.html', {'matches': matches, 'teams': teams, 'groups': groups})
 
 
+def getMatchDetail(request, matchid):
+    lineup = service.getEuroLineUp(matchid)
+
+    return render(request, 'matchdetail.html', {'lineup': lineup})
+
+
 def getBraketview(request):
     braket = service.getEuroBraket()
 
