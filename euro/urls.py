@@ -6,4 +6,5 @@ urlpatterns = [
     path('matches', views.getMatches),
     path('braket', views.getBraketview),
     path('teams', views.getTeam),
+    path('stats', views.getStats),
 ]

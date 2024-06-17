@@ -37,6 +37,18 @@ def getTeam(request):
     return render(request, 'teams.html', {'teams': teams})
 
 
+def getStats(request):
+    stats = service.getEuroTeamStats()
+
+    nameCol = []
+    for name in stats[0]['statistics']:
+        dict_col = {"name": name['name'], "colname": name['name'].replace(
+            "_", " ").capitalize()}
+        nameCol.append(dict_col)
+
+    return render(request, 'stats.html', {'stats': stats, 'nameCol': nameCol})
+
+
 def getGroup(request):
     groups = service.getEuroGroup()
 

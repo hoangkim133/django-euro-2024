@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table" style="margin-top: 2rem">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Team</th>
+                        {% for name in nameCol %}
+                            <th scope="col">{{name.colname}}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in stats %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <th scope="row">
+                                    <div style="display: flex; align-items: center;">
+                                        <img src="{{stat.team.logoUrl}}" style="height: 1.25rem" alt="logo">
+                                        <span style="margin-left: 5px">{{ stat.team.internationalName }}</span>
+                                    </div> 
+                                </th>
+                                {% for statName in stat.statistics %}
+                                    <th scope="row">{{ statName.value }}</th>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
