@@ -173,3 +173,22 @@ def convert_time_between_offsets(datetime_str, from_offset=2, to_offset=7):
     new_date = date + timedelta(hours=to_offset)
 
     return new_date
+
+def get_complementary_color(hex_color):
+    # Remove the hash if present
+    hex_color = hex_color.lstrip('#')
+    
+    # Parse the hex color
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    
+    # Compute the complementary color
+    r = 255 - r
+    g = 255 - g
+    b = 255 - b
+    
+    # Convert back to hex and format the string
+    complementary_color = f'#{r:02X}{g:02X}{b:02X}'
+    
+    return complementary_color

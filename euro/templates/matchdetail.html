@@ -5,6 +5,7 @@
 
     <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="row">
+            {% if lineup.lineupStatus == 'TACTICAL_AVAILABLE' %}
             <div class="col-4">
                 <h3 style="text-align: left; margin-top: 1rem">Line-ups</h3>
                 <div>
@@ -24,16 +25,22 @@
                         <div style="display: grid; position: absolute; top: 0; left: 0; height: 100%; width: 100%;">
                             <div style="position: relative;">
                                 {% for player in lineup.homeTeam.field %}
-                                    <div style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, 0%);">
-                                        <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 1.75rem">
+                                    <div style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, -10%);">
+                                        <div style="position: relative">
+                                            <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 1.75rem">
+                                            <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                        </div>
                                         <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>
                                     </div>
                                 {% endfor %}
                             </div>
                             <div style="position: relative">
                                 {% for player in lineup.awayTeam.field %}
-                                    <div style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -100%);">
-                                        <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 1.75rem">
+                                    <div style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -60%);">
+                                        <div style="position: relative">
+                                            <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 1.75rem">
+                                            <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600; text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                        </div>
                                         <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>
                                     </div>
                                 {% endfor %}
@@ -53,12 +60,57 @@
                     </div> 
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-5">
                 <h3 style="text-align: left; margin-top: 1rem">Substitutions</h3>
-                <div>
-                   
+                <div class="row">
+                    <div class="col">
+                        <div style="text-align: left; display: flex; align-items: center;">
+                            <img src="{{lineup.homeTeam.team.logoUrl}}" style="height: 1.5rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.homeTeam.team.internationalName }}</span>
+                        </div>
+                        {% for player in lineup.homeTeam.bench %}
+                            <div style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
+                                <div style="position: relative">
+                                    <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 2.4rem">
+                                    <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                </div>
+                                <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
+                                    {{player.player.nationalShirtName}}
+                                    {% if player.type == 'GOALKEEPER' %}
+                                        (GK)
+                                    {% endif %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <div style="text-align: left; display: flex; align-items: center;">
+                            <img src="{{lineup.awayTeam.team.logoUrl}}" style="height: 1.5rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.awayTeam.team.internationalName }}</span>
+                        </div>
+                        {% for player in lineup.awayTeam.bench %}
+                            <div style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
+                                <div style="position: relative">
+                                    <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 2.4rem">
+                                    <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                </div>
+                                <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
+                                    {{player.player.nationalShirtName}}
+                                    {% if player.type == 'GOALKEEPER' %}
+                                        (GK)
+                                    {% endif %}
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
+            {% elif lineup.lineupStatus == 'NOT_AVAILABLE' %}
+                <p style="font-size: xx-large; font-weight: 600;">Coming soon</p>
+            {% else %}
+                
+            {% endif %}     
+            
         </div>
     </div>
     

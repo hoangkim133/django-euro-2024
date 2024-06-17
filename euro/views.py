@@ -139,6 +139,12 @@ def getMatches(request):
 def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
 
+    if lineup['lineupStatus'] == 'TACTICAL_AVAILABLE':
+        lineup['awayTeam']['textColor'] = service.get_complementary_color(
+            lineup['awayTeam']['shirtColor'])
+        lineup['homeTeam']['textColor'] = service.get_complementary_color(
+            lineup['homeTeam']['shirtColor'])
+
     return render(request, 'matchdetail.html', {'lineup': lineup})
 
 

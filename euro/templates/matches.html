@@ -89,8 +89,16 @@
                                                     &nbsp;LIVE
                                                 </div>
                                             {% elif match.status == 'UPCOMING' %}
-                                                <p style="font-size: large; font-weight: 200; margin-bottom: 0">{{ match.kickOffTime.dateTime}}</p>
-                                                <p style="font-size: xx-large; font-weight: 600;">{{ match.kickOffTime.time}}</p>
+                                                    <p style="font-size: large; font-weight: 200; margin-bottom: 0">{{ match.kickOffTime.dateTime}}</p>
+                                                {% if match.lineupStatus == 'TACTICAL_AVAILABLE' %}
+                                                    <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem;">
+                                                        Line-ups
+                                                    </div>
+                                                {% elif match.lineupStatus == 'NOT_AVAILABLE' %}
+                                                    <p style="font-size: xx-large; font-weight: 600;">{{ match.kickOffTime.time}}</p>
+                                                {% else %}
+                                                    
+                                                {% endif %}     
                                             {% elif match.status == 'FINISHED' %}
                                                 <p style="font-size: large; font-weight: 200; margin-bottom: 0">Full time</p>
                                                 <p style="font-size: large; font-weight: 600;">{{ match.kickOffTime.dateTime}}</p>
