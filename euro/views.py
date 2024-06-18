@@ -30,6 +30,9 @@ country_to_flag = {
     "TUR": "🇹🇷"
 }
 
+player_of_match = ['played_time', 'goals', 'passes_accuracy',
+                   'assists', 'top_speed', 'distance_covered']
+
 
 def getTeam(request):
     teams = service.getEuroTeam()
@@ -129,7 +132,6 @@ def getMatches(request):
     teams = []
     for group in groups:
         for item in group['items']:
-            # print(item['team']['countryCode'])
             item['team']['emojiCode'] = country_to_flag[item['team']['countryCode']]
             teams.append(item['team'])
 
@@ -140,8 +142,24 @@ def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
     match = service.getEuroMatch(matchid)
 
+    playerOfMatch = {}
+    if 'playerOfTheMatch' in match[0]:
+        playerOfMatchFullData = service.getEuroStatPlayerOfMatch(
+            matchid, match[0]['playerOfTheMatch']['player']['id'])[0]
+        
+        statistics = []
+        playerOfMatch['playerId'] = playerOfMatchFullData['playerId']
+        playerOfMatch['teamId'] = playerOfMatchFullData['teamId']
+
+        for stat in playerOfMatchFullData['statistics']:
+            if stat['name'] in player_of_match:
+                statistics.append(stat)
+
+        playerOfMatch['statistics'] = statistics
+
+
     value = service.convert_time_between_offsets(
-            match[0].get("kickOffTime").get("dateTime"))
+        match[0].get("kickOffTime").get("dateTime"))
     match[0]["kickOffTime"]["dateTime"] = value.strftime("%a, %B %d")
 
     if lineup['lineupStatus'] == 'TACTICAL_AVAILABLE':
@@ -150,7 +168,7 @@ def getMatchDetail(request, matchid):
         lineup['homeTeam']['textColor'] = service.get_complementary_color(
             lineup['homeTeam']['shirtColor'])
 
-    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0]})
+    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch})
 
 
 def getBraketview(request):

@@ -44,7 +44,7 @@
                                                             justify-content: center;">c</div>
                                             {% endif %}
                                         </div>
-                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>                                        
+                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName|title}}</p>                                        
                                     </div>
                                 {% endfor %}
                             </div>
@@ -69,7 +69,7 @@
                                                             justify-content: center;">c</div>
                                             {% endif %}
                                         </div>
-                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>
+                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName|title}}</p>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -101,7 +101,7 @@
                                     <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
                                 <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
-                                    {{player.player.nationalShirtName}}
+                                    {{player.player.nationalShirtName|title}}
                                     {% if player.type == 'GOALKEEPER' %}
                                         (GK)
                                     {% endif %}
@@ -121,7 +121,7 @@
                                     <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
                                 <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
-                                    {{player.player.nationalShirtName}}
+                                    {{player.player.nationalShirtName|title}}
                                     {% if player.type == 'GOALKEEPER' %}
                                         (GK)
                                     {% endif %}
@@ -132,21 +132,52 @@
                 </div>
             </div>
             <div class="col">
-                <div style="margin-top: 3rem">
-                    <p style="margin-bottom: 0.5rem; color: grey">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
-                    <img src="{{match.stadium.images.MEDIUM_WIDE}}" style="max-height: 12rem;">
-                    <p style="margin-bottom: 0; margin-top: 2rem; color: grey; font-size: 14px; text-decoration: underline">{{match.kickOffTime.dateTime}}</p>
-                    <p style="margin-bottom: 0.5rem;">{{match.group.metaData.groupName}}</p>
+                <div style="display: flex; margin-top: 3rem; justify-content: center">
+                    <div style="">
+                        <p style="margin-bottom: 0.5rem; color: grey">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
+                        <img src="{{match.stadium.images.MEDIUM_WIDE}}" style="max-height: 12rem;">
                     </div>
+                    {% if match.condition %}
+                    <div style="border-left: solid 1px lightgrey;
+                                margin-left: 3rem;
+                                padding-left: 1rem;
+                                display: flex;
+                                align-items: center;">
+                        <div style="font-size: 5rem; font-family: monospace;">{{match.condition.temperature}}&deg;</div>
+                        <div style="margin-left: 0.75rem; text-align: left; color: darkslategrey;">
+                            <p><b>{{match.condition.weatherCondition|title}}</b></p>
+                            <p>The pitch is {{match.condition.pitchCondition|lower}}</p>
+                            <p>Humidity: {{match.condition.humidity}}%</p>
+                            <p>Wind: {{match.condition.windSpeed}}km/h</p>
+                        </div>
+                  
+                    </div>
+                    {% endif %}
+                </div>
+                   
+                        <p style="margin-bottom: 0; margin-top: 2rem; color: grey; font-size: 14px; text-decoration: underline">{{match.kickOffTime.dateTime}}</p>
+                        <p style="margin-bottom: 0.5rem;">{{match.group.metaData.groupName}}</p>
                     <div class="row">
                         <div class="col-5" style="display: flex; justify-content: flex-end; font-size: xxx-large; align-items: center">
                             <p style="margin-bottom: 0">{{match.homeTeam.internationalName}}</p>
                             <img src="{{match.homeTeam.logoUrl}}" style="height: 3rem; margin: 0 0 0 0.5rem">
                         </div> 
+                        {% if match.status == 'LIVE' %}
+                            <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
+                                <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                                    {{match.score.total.home}} - {{match.score.total.away}} </div>
+                            </div> 
+                        {% elif match.status == 'UPCOMING' %}
+                        <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
+                            <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                                0 - 0 </div>
+                        </div> 
+                        {% elif match.status == 'FINISHED' %}
                         <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
                             <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
                                 {{match.score.total.home}} - {{match.score.total.away}} </div>
                         </div> 
+                        {% endif %} 
                         <div class="col-5" style="display: flex; justify-content: flex-start; font-size: xxx-large; align-items: center">
                             <img src="{{match.awayTeam.logoUrl}}" style="height: 3rem; margin: 0 0.5rem 0 0">
                             <p style="margin-bottom: 0">{{match.awayTeam.internationalName}}</p>
@@ -164,7 +195,7 @@
                             {% endif %} 
                         {% endif %} 
                     {% elif match.status == 'UPCOMING' %}
-                             
+                        <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">Lines up</p>
                     {% elif match.status == 'FINISHED' %}
                         <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">Full time</p>
                     {% endif %} 
@@ -248,14 +279,51 @@
                         </div>
                     {% endfor %}
                     <div style="border-top: solid 1px #d6d6d6; width: 100%; margin: 3rem 0 2rem 0"></div>
-                    <div style="background: #20399a;
+                    
+                        {% if match.playerOfTheMatch %}
+                            <div style="background: #20399a;
                                 padding: 1rem;
                                 border-radius: 1rem;">
-                        <h3 style="text-align: left; font-weight: 600; color: white">Player of the Match</h3>
-                        <img src="{{match.playerOfTheMatch.player.imageUrl}}" style="height: 10rem; border: solid 3px grey; border-radius: 5rem;">
-                        <p style="color: white; margin-bottom: 0; font-size: 25px; margin-top: 0.5rem">{{match.playerOfTheMatch.player.internationalName}}</p>
-                        <p style="color: white; font-size: 16px; font-weight: 200">{{match.playerOfTheMatch.player.translations.countryName.EN}}</p>
-                    </div>
+                                    <div style="display: flex; justify-content: space-between">
+                                        <h3 style="text-align: left; font-weight: 600; color: white">Player of the Match</h3>
+                                        <div style="color: #ffffffbd">
+                                            Presented by  <img class="vivo" src="https://img.uefa.com/imgml/uefacom/sponsors/team/Vivo.png?imwidth=700 " style="height: 2rem;">
+                                        </div>
+                                    </div>
+                                    <div style="position: relative">
+                                        <img src="{{match.playerOfTheMatch.player.imageUrl}}" style="height: 10rem; border: solid 3px grey; border-radius: 5rem;">
+                                        {% if match.playerOfTheMatch.teamId == match.homeTeam.id %}
+                                            <img src="{{match.homeTeam.logoUrl}}" style="position: absolute;
+                                            height: 3rem;
+                                            border-radius: 1.5rem;
+                                            bottom: 0;
+                                            left: 54%;">
+                                        {% else %}
+                                            <img src="{{match.awayTeam.logoUrl}}" style="position: absolute;
+                                            height: 3rem;
+                                            border-radius: 1.5rem;
+                                            bottom: 0;
+                                            left: 54%;">
+                                        {% endif %}
+                                       
+                                    </div>
+                                    <p style="color: white; margin-bottom: 0; font-size: 25px; margin-top: 0.5rem">{{match.playerOfTheMatch.player.internationalName}}</p>
+                                    <p style="color: white; font-size: 16px; font-weight: 200">{{match.playerOfTheMatch.player.translations.countryName.EN}}</p>
+                                
+
+                                <div class="row">
+                                    {% for stat in playerOfMatch.statistics %}
+                                        <div class="col-6">
+                                            <div style="display: flex; justify-content: space-between; color: white; border-bottom: solid 0.75px #ffffff6b; align-items: center; padding: 0.5rem 0 0.5rem 0">
+                                                <p style="font-size: 20px; margin-bottom: 0; color: #ffffffad">{{stat.translations.name.EN}}</p>
+                                                <p style="font-size: 25px; font-weight: 500; margin-bottom: 0">{{stat.value}}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        
                 </div>
 
             </div>

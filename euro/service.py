@@ -219,7 +219,7 @@ def getEuroStatPlayerOfMatch(matchid, playerid):
 
     response = requests.request("GET", url, headers=headers, data=payload)
 
-    print(response.text)
+    return json.loads(response.text)
 
 
 def convert_time_between_offsets(datetime_str, from_offset=2, to_offset=7):
