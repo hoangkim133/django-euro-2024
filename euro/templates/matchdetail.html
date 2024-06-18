@@ -145,7 +145,7 @@
                                 align-items: center;">
                         <div style="font-size: 5rem; font-family: monospace;">{{match.condition.temperature}}&deg;</div>
                         <div style="margin-left: 0.75rem; text-align: left; color: darkslategrey;">
-                            <p><b>{{match.condition.weatherCondition|title}}</b></p>
+                            <p><b>{{match.condition.translations.weatherConditionName.EN|title}}</b></p>
                             <p>The pitch is {{match.condition.pitchCondition|lower}}</p>
                             <p>Humidity: {{match.condition.humidity}}%</p>
                             <p>Wind: {{match.condition.windSpeed}}km/h</p>
