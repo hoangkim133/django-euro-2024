@@ -135,7 +135,8 @@
                 <div style="margin-top: 3rem">
                     <p style="margin-bottom: 0.5rem; color: grey">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
                     <img src="{{match.stadium.images.MEDIUM_WIDE}}" style="max-height: 12rem;">
-                    <p style="margin-bottom: 0.5rem; margin-top: 2rem">{{match.group.metaData.groupName}}</p>
+                    <p style="margin-bottom: 0; margin-top: 2rem; color: grey; font-size: 14px; text-decoration: underline">{{match.kickOffTime.dateTime}}</p>
+                    <p style="margin-bottom: 0.5rem;">{{match.group.metaData.groupName}}</p>
                     </div>
                     <div class="row">
                         <div class="col-5" style="display: flex; justify-content: flex-end; font-size: xxx-large; align-items: center">
@@ -247,7 +248,14 @@
                         </div>
                     {% endfor %}
                     <div style="border-top: solid 1px #d6d6d6; width: 100%; margin: 3rem 0 2rem 0"></div>
-
+                    <div style="background: #20399a;
+                                padding: 1rem;
+                                border-radius: 1rem;">
+                        <h3 style="text-align: left; font-weight: 600; color: white">Player of the Match</h3>
+                        <img src="{{match.playerOfTheMatch.player.imageUrl}}" style="height: 10rem; border: solid 3px grey; border-radius: 5rem;">
+                        <p style="color: white; margin-bottom: 0; font-size: 25px; margin-top: 0.5rem">{{match.playerOfTheMatch.player.internationalName}}</p>
+                        <p style="color: white; font-size: 16px; font-weight: 200">{{match.playerOfTheMatch.player.translations.countryName.EN}}</p>
+                    </div>
                 </div>
 
             </div>

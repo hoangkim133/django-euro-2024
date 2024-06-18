@@ -140,6 +140,10 @@ def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
     match = service.getEuroMatch(matchid)
 
+    value = service.convert_time_between_offsets(
+            match[0].get("kickOffTime").get("dateTime"))
+    match[0]["kickOffTime"]["dateTime"] = value.strftime("%a, %B %d")
+
     if lineup['lineupStatus'] == 'TACTICAL_AVAILABLE':
         lineup['awayTeam']['textColor'] = service.get_complementary_color(
             lineup['awayTeam']['shirtColor'])
