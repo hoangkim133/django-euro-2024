@@ -25,21 +25,49 @@
                         <div style="display: grid; position: absolute; top: 0; left: 0; height: 100%; width: 100%;">
                             <div style="position: relative;">
                                 {% for player in lineup.homeTeam.field %}
-                                    <div style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, -10%);">
+                                    <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, -10%);">
                                         <div style="position: relative">
                                             <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                            {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
+                                                <div style="background: black;
+                                                            width: 0.7rem;
+                                                            height: 0.7rem;
+                                                            border-radius: 0.35rem;
+                                                            position: absolute;
+                                                            bottom: -10%;
+                                                            left: 50%;
+                                                            color: white;
+                                                            font-size: 10px;
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;">c</div>
+                                            {% endif %}
                                         </div>
-                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>
+                                        <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>                                        
                                     </div>
                                 {% endfor %}
                             </div>
                             <div style="position: relative">
                                 {% for player in lineup.awayTeam.field %}
-                                    <div style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -60%);">
+                                    <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -60%);">
                                         <div style="position: relative">
                                             <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600; text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
+                                            {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
+                                                <div style="background: black;
+                                                            width: 0.75rem;
+                                                            height: 0.75rem;
+                                                            border-radius: 0.375rem;
+                                                            position: absolute;
+                                                            bottom: -10%;
+                                                            left: 50%;
+                                                            color: white;
+                                                            font-size: 10px;
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;">c</div>
+                                            {% endif %}
                                         </div>
                                         <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName}}</p>
                                     </div>
@@ -59,19 +87,17 @@
                         <img src="{{lineup.awayTeam.team.logoUrl}}" style="height: 3rem" alt="logo">
                     </div> 
                 </div>
-            </div>
-            <div class="col-5">
                 <h3 style="text-align: left; margin-top: 1rem">Substitutions</h3>
                 <div class="row">
                     <div class="col">
                         <div style="text-align: left; display: flex; align-items: center;">
-                            <img src="{{lineup.homeTeam.team.logoUrl}}" style="height: 1.5rem" alt="logo">
+                            <img src="{{lineup.homeTeam.team.logoUrl}}" style="height: 2rem" alt="logo">
                             <span style="margin-left: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.homeTeam.team.internationalName }}</span>
                         </div>
                         {% for player in lineup.homeTeam.bench %}
-                            <div style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
+                            <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="top" data-bs-html="true" style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
                                 <div style="position: relative">
-                                    <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 2.4rem">
+                                    <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
                                 <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
@@ -85,13 +111,13 @@
                     </div>
                     <div class="col">
                         <div style="text-align: left; display: flex; align-items: center;">
-                            <img src="{{lineup.awayTeam.team.logoUrl}}" style="height: 1.5rem" alt="logo">
+                            <img src="{{lineup.awayTeam.team.logoUrl}}" style="height: 2rem" alt="logo">
                             <span style="margin-left: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.awayTeam.team.internationalName }}</span>
                         </div>
                         {% for player in lineup.awayTeam.bench %}
-                            <div style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
+                            <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="top" data-bs-html="true" style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
                                 <div style="position: relative">
-                                    <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 2.4rem">
+                                    <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
                                 <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
@@ -105,13 +131,142 @@
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <div style="margin-top: 3rem">
+                    <p style="margin-bottom: 0.5rem; color: grey">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
+                    <img src="{{match.stadium.images.MEDIUM_WIDE}}" style="max-height: 12rem;">
+                    <p style="margin-bottom: 0.5rem; margin-top: 2rem">{{match.group.metaData.groupName}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-5" style="display: flex; justify-content: flex-end; font-size: xxx-large; align-items: center">
+                            <p style="margin-bottom: 0">{{match.homeTeam.internationalName}}</p>
+                            <img src="{{match.homeTeam.logoUrl}}" style="height: 3rem; margin: 0 0 0 0.5rem">
+                        </div> 
+                        <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
+                            <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                                {{match.score.total.home}} - {{match.score.total.away}} </div>
+                        </div> 
+                        <div class="col-5" style="display: flex; justify-content: flex-start; font-size: xxx-large; align-items: center">
+                            <img src="{{match.awayTeam.logoUrl}}" style="height: 3rem; margin: 0 0.5rem 0 0">
+                            <p style="margin-bottom: 0">{{match.awayTeam.internationalName}}</p>
+                        </div> 
+                    </div>
+                    
+                    {% if match.status == 'LIVE' %}
+                        {% if match.phase == 'HALF_TIME_BREAK' %}
+                            <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">Half time</p>
+                        {% else %}
+                            {% if match.minute.injury %}
+                                <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">{{match.minute.normal}}'+{{match.minute.injury}}'</p>
+                            {% else %}
+                                <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">{{match.minute.normal}}'</p>
+                            {% endif %} 
+                        {% endif %} 
+                    {% elif match.status == 'UPCOMING' %}
+                             
+                    {% elif match.status == 'FINISHED' %}
+                        <p style="margin-bottom: 1rem; margin-top: 0.5rem; color: green">Full time</p>
+                    {% endif %} 
+                    {% for event in match.playerEvents.scorers %}
+                        <div class="row">
+                            {% if event.teamId == match.homeTeam.id %}   
+                                <div class="col" style="text-align: right">
+                                    {% if event.goalType == "SCORED" %}
+                                        {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}' 
+                                            {% if event.time.injuryMinute %}
+                                                + {{event.time.injuryMinute}}'
+                                            {% endif %}
+                                        </span>
+                                    {% elif event.goalType == "PENALTY" %}
+                                        {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}'  {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %} (p) </span>
+                                    {% endif %}
+                                </div> 
+                                <div class="col-1">
+                                    <svg style="height: 1.5rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="pk-svg__icon pk-svg__icon--product" part="svg"><path fill="#3C3C3C" fill-rule="evenodd" d="M9.2 10.68l2.212-1.608a1 1 0 011.176 0l2.213 1.609a1 1 0 01.363 1.117l-.846 2.605a1 1 0 01-.95.69h-2.735a1 1 0 01-.951-.69l-.846-2.605a1 1 0 01.363-1.117zM12 21.002c-4.963 0-9.001-4.038-9.001-9.001 0-4.963 4.038-9.001 9.001-9.001 4.963 0 9.001 4.038 9.001 9.001 0 4.963-4.038 9.001-9.001 9.001zm0-1.501c-.68 0-1.337-.091-1.963-.26L8.85 17.05a1 1 0 00-.698-.507l-2.433-.45a7.453 7.453 0 01-1.211-3.756l1.697-1.786a1 1 0 00.266-.82l-.32-2.42A7.534 7.534 0 019.37 4.975l2.2 1.051a1 1 0 00.862 0l2.2-1.05a7.534 7.534 0 013.218 2.333l-.32 2.42a1 1 0 00.266.82l1.697 1.787a7.453 7.453 0 01-1.21 3.756l-2.434.45a1 1 0 00-.698.507l-1.187 2.19c-.626.169-1.284.26-1.963.26z" clip-rule="evenodd"></path></svg>
+                                </div> 
+                                <div class="col" style="text-align: left">
+                                    {% if event.goalType == "OWN" %}
+                                        {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}'  {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %}  (og) </span>
+                                    {% endif %}
+                                </div> 
+                            {% elif event.teamId == match.awayTeam.id %}
+                                <div class="col" style="text-align: right">
+                                    {% if event.goalType == "OWN" %}
+                                        {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}'  {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %}(og) </span>
+                                    {% endif %}
+                                </div> 
+                                <div class="col-1">
+                                    <svg style="height: 1.5rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="pk-svg__icon pk-svg__icon--product" part="svg"><path fill="#3C3C3C" fill-rule="evenodd" d="M9.2 10.68l2.212-1.608a1 1 0 011.176 0l2.213 1.609a1 1 0 01.363 1.117l-.846 2.605a1 1 0 01-.95.69h-2.735a1 1 0 01-.951-.69l-.846-2.605a1 1 0 01.363-1.117zM12 21.002c-4.963 0-9.001-4.038-9.001-9.001 0-4.963 4.038-9.001 9.001-9.001 4.963 0 9.001 4.038 9.001 9.001 0 4.963-4.038 9.001-9.001 9.001zm0-1.501c-.68 0-1.337-.091-1.963-.26L8.85 17.05a1 1 0 00-.698-.507l-2.433-.45a7.453 7.453 0 01-1.211-3.756l1.697-1.786a1 1 0 00.266-.82l-.32-2.42A7.534 7.534 0 019.37 4.975l2.2 1.051a1 1 0 00.862 0l2.2-1.05a7.534 7.534 0 013.218 2.333l-.32 2.42a1 1 0 00.266.82l1.697 1.787a7.453 7.453 0 01-1.21 3.756l-2.434.45a1 1 0 00-.698.507l-1.187 2.19c-.626.169-1.284.26-1.963.26z" clip-rule="evenodd"></path></svg>
+                                </div> 
+                                <div class="col" style="text-align: left">
+                                    {% if event.goalType == "SCORED" %}
+                                        {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}' {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %}  </span>
+                                    {% elif event.goalType == "PENALTY" %}
+                                         {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}'  {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %}(p) </span>
+                                    {% endif %}
+                                </div> 
+                            {% endif %}
+                        </div>
+                        
+                    {% endfor %}
+                    {% for event in match.playerEvents.redCards %}
+                        <div class="row">
+                            {% if event.teamId == match.homeTeam.id %}   
+                                <div class="col" style="text-align: right">
+                                    {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}' 
+                                        {% if event.time.injuryMinute %}
+                                            + {{event.time.injuryMinute}}'
+                                        {% endif %}
+                                    </span>
+                                </div> 
+                                <div class="col-1">
+                                    <svg style="height: 1.5rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="pk-svg__icon pk-svg__icon--product" part="svg"><path fill="red" d="M5 3a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H6a1 1 0 01-1-1V3z"></path></svg>                                </div> 
+                                <div class="col" style="text-align: left">
+                                   
+                                </div> 
+                            {% elif event.teamId == match.awayTeam.id %}
+                                <div class="col" style="text-align: right">
+       
+                                </div> 
+                                <div class="col-1">
+                                    <svg style="height: 1.5rem" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="pk-svg__icon pk-svg__icon--product" part="svg"><path fill="red" d="M5 3a1 1 0 011-1h12a1 1 0 011 1v18a1 1 0 01-1 1H6a1 1 0 01-1-1V3z"></path></svg>                                </div> 
+                                <div class="col" style="text-align: left">
+                                    {{event.player.nationalShirtName}} <span style="color: grey">{{event.time.minute}}' </span>
+                                </div> 
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div style="border-top: solid 1px #d6d6d6; width: 100%; margin: 3rem 0 2rem 0"></div>
+
+                </div>
+
+            </div>
             {% elif lineup.lineupStatus == 'NOT_AVAILABLE' %}
                 <p style="font-size: xx-large; font-weight: 600;">Coming soon</p>
             {% else %}
                 
             {% endif %}     
-            
         </div>
     </div>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+          var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl, {
+              html: true
+            });
+          });
+        });
+      </script>
+       
 {% endblock %}

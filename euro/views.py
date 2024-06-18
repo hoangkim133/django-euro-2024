@@ -138,6 +138,7 @@ def getMatches(request):
 
 def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
+    match = service.getEuroMatch(matchid)
 
     if lineup['lineupStatus'] == 'TACTICAL_AVAILABLE':
         lineup['awayTeam']['textColor'] = service.get_complementary_color(
@@ -145,7 +146,7 @@ def getMatchDetail(request, matchid):
         lineup['homeTeam']['textColor'] = service.get_complementary_color(
             lineup['homeTeam']['shirtColor'])
 
-    return render(request, 'matchdetail.html', {'lineup': lineup})
+    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0]})
 
 
 def getBraketview(request):
