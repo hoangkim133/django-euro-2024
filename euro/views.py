@@ -33,6 +33,9 @@ country_to_flag = {
 player_of_match = ['played_time', 'goals', 'passes_accuracy',
                    'assists', 'top_speed', 'distance_covered']
 
+stat_match = ['attempts', 'attempts_on_target', 'ball_possession', 'passes_attempted',
+              'passes_accuracy', 'fouls_committed', 'yellow_cards', 'red_cards', 'offsides', 'corners']
+
 
 def getTeam(request):
     teams = service.getEuroTeam()
@@ -141,12 +144,39 @@ def getMatches(request):
 def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
     match = service.getEuroMatch(matchid)
+    match_stat = service.getEuroStatMatch(matchid)
+
+    match[0]['homeTeam']['iconHtml'] = country_to_flag[match[0]
+                                                       ['homeTeam']['teamCode']]
+    match[0]['awayTeam']['iconHtml'] = country_to_flag[match[0]
+                                                       ['awayTeam']['teamCode']]
+
+    homeTeamId = match[0]['homeTeam']['id']
+    awayTeamId = match[0]['awayTeam']['id']
+
+    match_stat_result = []
+    for stat in stat_match:
+        dct_stat = {}
+        dct_stat['name'] = stat
+
+        for team in match_stat:
+            if team['teamId'] == homeTeamId:
+                for origin_stat_home in team['statistics']:
+                    if origin_stat_home['name'] == stat:
+                        dct_stat['homeTeamValue'] = origin_stat_home['value']
+                        dct_stat['nameDisplay'] = origin_stat_home['translations']['name']['EN']
+            elif team['teamId'] == awayTeamId:
+                for origin_stat_away in team['statistics']:
+                    if origin_stat_away['name'] == stat:
+                        dct_stat['awayTeamValue'] = origin_stat_away['value']
+
+        match_stat_result.append(dct_stat)
 
     playerOfMatch = {}
     if 'playerOfTheMatch' in match[0]:
         playerOfMatchFullData = service.getEuroStatPlayerOfMatch(
             matchid, match[0]['playerOfTheMatch']['player']['id'])[0]
-        
+
         statistics = []
         playerOfMatch['playerId'] = playerOfMatchFullData['playerId']
         playerOfMatch['teamId'] = playerOfMatchFullData['teamId']
@@ -156,7 +186,6 @@ def getMatchDetail(request, matchid):
                 statistics.append(stat)
 
         playerOfMatch['statistics'] = statistics
-
 
     value = service.convert_time_between_offsets(
         match[0].get("kickOffTime").get("dateTime"))
@@ -168,7 +197,7 @@ def getMatchDetail(request, matchid):
         lineup['homeTeam']['textColor'] = service.get_complementary_color(
             lineup['homeTeam']['shirtColor'])
 
-    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch})
+    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch, 'matchStat': match_stat_result})
 
 
 def getBraketview(request):

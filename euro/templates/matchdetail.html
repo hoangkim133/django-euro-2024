@@ -150,7 +150,6 @@
                             <p>Humidity: {{match.condition.humidity}}%</p>
                             <p>Wind: {{match.condition.windSpeed}}km/h</p>
                         </div>
-                  
                     </div>
                     {% endif %}
                 </div>
@@ -283,7 +282,8 @@
                         {% if match.playerOfTheMatch %}
                             <div style="background: #20399a;
                                 padding: 1rem;
-                                border-radius: 1rem;">
+                                border-radius: 1rem;
+                                margin-bottom: 2rem">
                                     <div style="display: flex; justify-content: space-between">
                                         <h3 style="text-align: left; font-weight: 600; color: white">Player of the Match</h3>
                                         <div style="color: #ffffffbd">
@@ -309,8 +309,6 @@
                                     </div>
                                     <p style="color: white; margin-bottom: 0; font-size: 25px; margin-top: 0.5rem">{{match.playerOfTheMatch.player.internationalName}}</p>
                                     <p style="color: white; font-size: 16px; font-weight: 200">{{match.playerOfTheMatch.player.translations.countryName.EN}}</p>
-                                
-
                                 <div class="row">
                                     {% for stat in playerOfMatch.statistics %}
                                         <div class="col-6">
@@ -323,7 +321,35 @@
                                 </div>
                             </div>
                         {% endif %}
-                        
+                        <div style="
+                        padding: 1rem;
+                        border-radius: 1rem;
+                        background: #cacaca42">
+                            <div class="row" style="font-size: 20px; display: flex; justify-content: center; align-items: center;">
+                                <div class="col-4" style="font-size: 30px">
+                                    &#20;&#20;{{match.homeTeam.iconHtml}}
+                                </div>
+                                <div class="col-4" style="border-bottom: solid 0.5px #c2c2c252">
+                                    <b>TEAM STATS</b>
+                                </div>
+                                <div class="col-4" style="font-size: 30px">
+                                    {{match.awayTeam.iconHtml}}&#20;&#20;
+                                </div>
+                            </div>
+                            {% for stat in matchStat%}
+                            <div class="row" style="margin: 0.75rem 0 0.75rem 0; display: flex; justify-content: center; align-items: center;">
+                                <div class="col-4">
+                                    {{stat.homeTeamValue}}
+                                </div>
+                                <div class="col-4" style="color: grey">
+                                    {{stat.nameDisplay}}
+                                </div>
+                                <div class="col-4">
+                                    {{stat.awayTeamValue}}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
                 </div>
 
             </div>
