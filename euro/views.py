@@ -145,6 +145,7 @@ def getMatchDetail(request, matchid):
     lineup = service.getEuroLineUp(matchid)
     match = service.getEuroMatch(matchid)
     match_stat = service.getEuroStatMatch(matchid)
+    eventLineup = service.getEuroEventLineUp(matchid)
 
     match[0]['homeTeam']['iconHtml'] = country_to_flag[match[0]
                                                        ['homeTeam']['teamCode']]
@@ -197,7 +198,7 @@ def getMatchDetail(request, matchid):
         lineup['homeTeam']['textColor'] = service.get_complementary_color(
             lineup['homeTeam']['shirtColor'])
 
-    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch, 'matchStat': match_stat_result})
+    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch, 'matchStat': match_stat_result, 'eventLineup': eventLineup})
 
 
 def getBraketview(request):

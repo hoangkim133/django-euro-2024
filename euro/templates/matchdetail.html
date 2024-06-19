@@ -26,7 +26,7 @@
                             <div style="position: relative;">
                                 {% for player in lineup.homeTeam.field %}
                                     <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, -10%);">
-                                        <div style="position: relative">
+                                        <div id="player_{{player.player.id}}" style="position: relative">
                                             <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                             {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
@@ -51,7 +51,7 @@
                             <div style="position: relative">
                                 {% for player in lineup.awayTeam.field %}
                                     <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -60%);">
-                                        <div style="position: relative">
+                                        <div id="player_{{player.player.id}}" style="position: relative">
                                             <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600; text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                             {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
@@ -96,7 +96,7 @@
                         </div>
                         {% for player in lineup.homeTeam.bench %}
                             <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="top" data-bs-html="true" style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
-                                <div style="position: relative">
+                                <div id="player_{{player.player.id}}" style="position: relative">
                                     <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
@@ -116,7 +116,7 @@
                         </div>
                         {% for player in lineup.awayTeam.bench %}
                             <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="top" data-bs-html="true" style="display: flex; align-items: center; margin: 1rem 0 1rem 0">
-                                <div style="position: relative">
+                                <div id="player_{{player.player.id}}" style="position: relative">
                                     <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
@@ -369,6 +369,18 @@
             });
           });
         });
+
+
+        {% for event in eventLineup %}
+            if ("{{event.type}}" == "SUBSTITUTION"){
+                document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="triangle-down"></div>`);
+                document.getElementById("player_{{event.secondaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="triangle-up"></div>`);
+            } else if ("{{event.type}}" == "YELLOW_CARD") {
+                document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="yellow-card"></div>`);
+            } else if ("{{event.type}}" == "GOAL") {
+                document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal"><img style="width: 50%" src="https://i.ibb.co/Mh4XgyY/football-1.png"></div>`);
+            }
+        {% endfor %}
       </script>
        
 {% endblock %}
