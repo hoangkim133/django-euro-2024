@@ -378,7 +378,7 @@
             } else if ("{{event.type}}" == "YELLOW_CARD") {
                 document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="yellow-card"></div>`);
             } else if ("{{event.type}}" == "GOAL") {
-                document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal"><img style="width: 50%" src="https://i.ibb.co/Mh4XgyY/football-1.png"></div>`);
+                document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal"><img style="width: 10px" src="https://i.ibb.co/Mh4XgyY/football-1.png"></div>`);
             }
         {% endfor %}
       </script>
