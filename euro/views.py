@@ -198,7 +198,7 @@ def getMatchDetail(request, matchid):
         lineup['homeTeam']['textColor'] = service.get_complementary_color(
             lineup['homeTeam']['shirtColor'])
 
-    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch, 'matchStat': match_stat_result, 'eventLineup': eventLineup})
+    return render(request, 'matchdetail.html', {'lineup': lineup, 'match': match[0], 'playerOfMatch': playerOfMatch, 'matchStat': match_stat_result, 'eventLineup': eventLineup[::-1]})
 
 
 def getBraketview(request):
