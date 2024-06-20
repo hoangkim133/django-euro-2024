@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.getGroup),
@@ -11,5 +9,3 @@ urlpatterns = [
     path('teams', views.getTeam),
     path('stats', views.getStats),
 ]
-
-print(urlpatterns)
