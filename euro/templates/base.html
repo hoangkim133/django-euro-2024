@@ -129,25 +129,51 @@
       }
 
       .triangle-down {
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 9px solid red;
         position: absolute;
         bottom: -10%;
         right: 60%;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: -1px 1px 5px grey;
+      }
+
+      .triangle-down::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        border-left: 3.75px solid transparent;
+        border-right: 3.75px solid transparent;
+        border-top: 6px solid red;
       }
 
       .triangle-up {
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 9px solid green;
         position: absolute;
         bottom: -10%;
         right: 60%;
+        width: 10px;
+        height: 10px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: -1px 1px 5px grey;
+      }
+
+      .triangle-up::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        border-left: 3.75px solid transparent;
+        border-right: 3.75px solid transparent;
+        border-bottom: 6px solid green;
       }
 
       .goal {
