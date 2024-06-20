@@ -10,4 +10,6 @@ urlpatterns = [
     path('braket', views.getBraketview),
     path('teams', views.getTeam),
     path('stats', views.getStats),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
+]
+
+print(urlpatterns)
