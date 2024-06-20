@@ -13,4 +13,4 @@ pip install -r requirements.txt
 python manage.py collectstatic
 echo "BUILD END"
 
-python manage.py runserver
+# python manage.py runserver
