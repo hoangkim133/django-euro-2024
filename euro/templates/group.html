@@ -4,10 +4,11 @@
     <div class="container text-center" style="background: whitesmoke; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="row" id="short_info">
             {% for group in groups %}
-                <div class="col-4">
+                <div class="col-xl-4 col-md-6 col-12">
                     <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
                         <div class="card-body">
                             <p style="font-size: xx-large; font-weight: 600;">{{ group.group.metaData.groupName }}</p>
+                            <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                   <tr>
@@ -38,6 +39,8 @@
                                 </tbody>
                               </table>
                             </div>
+
+                            </div>
                     </div>
                 </div>
             {% endfor %}
@@ -48,6 +51,8 @@
                     <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
                         <div class="card-body">
                             <p style="font-size: xx-large; font-weight: 600; text-align: left; margin-bottom: 2rem">{{ group.group.metaData.groupName }}</p>
+                            <div class="table-responsive">
+
                             <table class="table">
                                 <thead>
                                   <tr>
@@ -69,7 +74,7 @@
                                         <tr>
                                             <th scope="row">{{team.rank}}</th>
                                             <td style="text-align: left">
-                                                <div style="display: flex; align-items: center; max-width: 2rem;">
+                                                <div style="display: flex; align-items: center; min-width: 2rem;">
                                                     <img src="{{team.team.logoUrl}}" style="height: 1.25rem" alt="logo">
                                                     <span style="margin-left: 5px">{{ team.team.internationalName }}</span>
                                                 </div>  
@@ -107,6 +112,7 @@
                                     {% endfor %}
                                 </tbody>
                               </table>
+                            </div>
                             </div>
                     </div>
                 </div>

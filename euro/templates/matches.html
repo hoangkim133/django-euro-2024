@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             {% for match in matches %}
-                <div class="match-info col-6" data-date="{{match.kickOffTime.date}}" data-status="{{match.status}}" data-group="{{match.group.id}}" data-teamHome="{{match.homeTeam.id}}" data-teamAway="{{match.awayTeam.id}}">
+                <div class="match-info col-xl-6 col-md-12 col-12" data-date="{{match.kickOffTime.date}}" data-status="{{match.status}}" data-group="{{match.group.id}}" data-teamHome="{{match.homeTeam.id}}" data-teamAway="{{match.awayTeam.id}}">
                     <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
                         <a href="/matches/{{match.id}}" style="all: unset;">
                             <div class="card-body">
