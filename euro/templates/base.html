@@ -147,7 +147,7 @@
         height: 0;
         border-left: 3.75px solid transparent;
         border-right: 3.75px solid transparent;
-        border-top: 6px solid red;
+        border-top: 5.5px solid red;
       }
 
       .triangle-up {
@@ -171,12 +171,31 @@
         height: 0;
         border-left: 3.75px solid transparent;
         border-right: 3.75px solid transparent;
-        border-bottom: 6px solid green;
+        border-bottom: 5.5px solid green;
       }
 
       .goal {
         position: absolute;
         top: -30%;
+      }
+
+      .captain {
+        background: black;
+        width: 10px;
+        height: 10px;
+        border-radius: 0.35rem;
+        position: absolute;
+        bottom: -10%;
+        left: 55%;
+        color: white;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .captain::before {
+        content: "c";
       }
     </style>
 </head>
