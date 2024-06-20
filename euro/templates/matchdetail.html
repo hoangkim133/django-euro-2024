@@ -26,7 +26,7 @@
                             <div style="position: relative;">
                                 {% for player in lineup.homeTeam.field %}
                                     <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{ player.fieldCoordinate.y|div:10 }}%; left:{{ player.fieldCoordinate.x|div:10 }}%; transform: translate(-50%, -10%);">
-                                        <div data-goal="0" data-card="0" id="player_{{player.player.id}}" style="position: relative">
+                                        <div data-goal="0" data-card="0" id="player_{{player.player.id}}" style="position: relative; width: max-content; margin: auto;">
                                             <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                             {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
@@ -51,22 +51,22 @@
                             <div style="position: relative">
                                 {% for player in lineup.awayTeam.field %}
                                     <div data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{player.player.imageUrl}}' alt='Image' width='100' height='100'><br>Name: {{player.player.internationalName}}<br>Position: {{player.player.fieldPosition|title}} {{player.player.detailedFieldPosition|title}}<br>Age: {{player.player.age}}</div>" data-bs-placement="right" data-bs-html="true" style="position: absolute; top:{{1000|sub:player.fieldCoordinate.y|div:10}}%; left:{{1000|sub:player.fieldCoordinate.x|div:10}}%; transform: translate(-50%, -60%);">
-                                        <div data-goal="0" data-card="0" id="player_{{player.player.id}}" style="position: relative">
+                                        <div data-goal="0" data-card="0" id="player_{{player.player.id}}" style="position: relative; width: max-content; margin: auto;">
                                             <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 1.75rem">
                                             <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600; text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                             {% if player.type == "CAPTAIN" or player.type == "GOALKEEPER_CAPTAIN" %}
                                                 <div style="background: black;
-                                                            width: 0.75rem;
-                                                            height: 0.75rem;
-                                                            border-radius: 0.375rem;
-                                                            position: absolute;
-                                                            bottom: -10%;
-                                                            left: 50%;
-                                                            color: white;
-                                                            font-size: 10px;
-                                                            display: flex;
-                                                            align-items: center;
-                                                            justify-content: center;">c</div>
+                                                width: 10px;
+                                                height: 10px;
+                                                border-radius: 0.35rem;
+                                                position: absolute;
+                                                bottom: -10%;
+                                                left: 55%;
+                                                color: white;
+                                                font-size: 10px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;">c</div>
                                             {% endif %}
                                         </div>
                                         <p style="font-size: small; color: white; margin-bottom: 0; text-shadow: 1px 1px 5px #000000 ">{{player.player.nationalShirtName|title}}</p>
@@ -378,21 +378,21 @@
             } else if ("{{event.type}}" == "YELLOW_CARD") {
                 if ("{{event.primaryActor.type}}" == "PLAYER") {
                     var card_{{event.id|slice:8}} = parseInt(document.getElementById("player_{{event.primaryActor.person.id}}").getAttribute("data-card"));
-                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="yellow-card" style="left: ${70 + card_{{event.id|slice:8}}*20}%"></div>`);
+                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="yellow-card" style="left: ${75 + card_{{event.id|slice:8}}*20}%"></div>`);
                     document.getElementById("player_{{event.primaryActor.person.id}}").setAttribute("data-card", card_{{event.id|slice:8}}  + 1);
                 }
             }   else if ("{{event.type}}" == "RED_CARD") {
                 if ("{{event.primaryActor.type}}" == "PLAYER") {
                     var card_{{event.id|slice:8}} = parseInt(document.getElementById("player_{{event.primaryActor.person.id}}").getAttribute("data-card"));
-                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="red-card" style="left: ${70 + card_{{event.id|slice:8}}*20}%"></div>`);
+                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="red-card" style="left: ${75 + card_{{event.id|slice:8}}*20}%"></div>`);
                     document.getElementById("player_{{event.primaryActor.person.id}}").setAttribute("data-card", card_{{event.id|slice:8}}  + 1);
                 }
             } else if ("{{event.type}}" == "GOAL") {
                 var goal_{{event.id|slice:8}} = parseInt(document.getElementById("player_{{event.primaryActor.person.id}}").getAttribute("data-goal"));
                 if ("{{event.subType}}" == "OWN") {
-                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal" style="right: ${65 + goal_{{event.id|slice:8}}*20}%"><img style="width: 10px" src="https://i.ibb.co/KhbYPSj/football-3.png"></div>`);
+                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal" style="right: ${75 + goal_{{event.id|slice:8}}*20}%"><img style="width: 10px" src="https://i.ibb.co/KhbYPSj/football-3.png"></div>`);
                 } else {
-                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal" style="right: ${65 + goal_{{event.id|slice:8}}*20}%"><img style="width: 10px" src="https://i.ibb.co/Mh4XgyY/football-1.png"></div>`);
+                    document.getElementById("player_{{event.primaryActor.person.id}}").insertAdjacentHTML("beforeend",`<div class="goal" style="right: ${75 + goal_{{event.id|slice:8}}*20}%"><img style="width: 10px" src="https://i.ibb.co/Mh4XgyY/football-1.png"></div>`);
                 }
                 document.getElementById("player_{{event.primaryActor.person.id}}").setAttribute("data-goal", goal_{{event.id|slice:8}}  + 1);
             }
