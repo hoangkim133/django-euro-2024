@@ -13,11 +13,11 @@
                         <img src="{{lineup.homeTeam.team.logoUrl}}" style="height: 3rem" alt="logo">
                         <div style="text-align: left; color: #ffffff">
                             <p style="margin-left: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.homeTeam.team.internationalName }}</p>
-                            <p style="margin-left: 10px; font-size: medium;  margin-bottom: 0; font-weight: 100";>Coach: 
-                                {% with first_coach=lineup.homeTeam.coaches|first %}
+                            {% with first_coach=lineup.homeTeam.coaches|first %}
+                            <p data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{first_coach.imageUrl}}' alt='Image' width='100' height='100'><br>Country: {{first_coach.person.translations.countryName.EN}}</div>" data-bs-placement="top" data-bs-html="true" style="margin-left: 10px; font-size: medium;  margin-bottom: 0; font-weight: 100";>Coach: 
                                     {{ first_coach.person.translations.name.EN }}
-                                {% endwith %}
                             </p>
+                            {% endwith %}
                         </div>
                     </div>  
                     <div style="background: url(https://img.uefa.com/imgml/uefacom/euro2020/lineups/pitch-bg.svg); background-size: cover; position: relative">
@@ -56,11 +56,11 @@
                     <div style="display: flex; align-items: center; background: #518a58; padding: 0.5rem; justify-content: flex-end;">
                         <div style="text-align: right; color: #ffffff">
                             <p style="margin-right: 10px; font-size: x-large; margin-bottom: 0">{{ lineup.awayTeam.team.internationalName }}</p>
-                            <p style="margin-right: 10px; font-size: medium;  margin-bottom: 0; font-weight: 100";>Coach: 
-                                {% with first_coach=lineup.awayTeam.coaches|first %}
+                            {% with first_coach=lineup.awayTeam.coaches|first %}
+                            <p data-bs-toggle="tooltip" title="<div class='img-tool'><img src='{{first_coach.imageUrl}}' alt='Image' width='100' height='100'><br>Country: {{first_coach.person.translations.countryName.EN}}</div>" data-bs-placement="top" data-bs-html="true" style="margin-right: 10px; font-size: medium;  margin-bottom: 0; font-weight: 100";>Coach: 
                                     {{ first_coach.person.translations.name.EN }}
-                                {% endwith %}
                             </p>
+                            {% endwith %}
                         </div>
                         <img src="{{lineup.awayTeam.team.logoUrl}}" style="height: 3rem" alt="logo">
                     </div> 
