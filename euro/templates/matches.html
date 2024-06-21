@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container text-center pe-2 pe-xl-4 pe-md-4 ps-2 ps-xl-4 ps-xl-4 pb-2 pb-md-4 pb-md-4" style="background: whitesmoke; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="container text-center pe-2 pe-xl-4 pe-md-4 ps-2 ps-xl-4 ps-xl-4 pb-2 pb-md-4 pb-md-4" style="background: #423F3E; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div style="display: flex; padding-top: 2rem">
             <select id="status_slb" class="form-select" aria-label="status">
                 <option value="all">Trạng thái thi đấu</option>
@@ -31,10 +31,10 @@
         <div class="row">
             {% for match in matches %}
                 <div class="match-info col-xl-6 col-md-12 col-12" data-date="{{match.kickOffTime.date}}" data-status="{{match.status}}" data-group="{{match.group.id}}" data-teamHome="{{match.homeTeam.id}}" data-teamAway="{{match.awayTeam.id}}">
-                    <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
+                    <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px; background: #cacaca42">
                         <a href="/matches/{{match.id}}" style="all: unset;">
                             <div class="card-body">
-                                <p style="text-align: left; color: grey">{{ match.group.metaData.groupName}}</p>
+                                <p style="text-align: left;">{{ match.group.metaData.groupName}}</p>
                                 <div style="display: flex; justify-content: space-between;">
                                     <div>
                                         <div style="display: flex; align-items: center; margin-bottom: 1rem">

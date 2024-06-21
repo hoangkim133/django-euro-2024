@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container text-center pe-2 pe-xl-4 pe-md-4 ps-2 ps-xl-4 ps-xl-4 pb-2 pb-md-4 pb-md-4" style="background: whitesmoke; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="container text-center pe-2 pe-xl-4 pe-md-4 ps-2 ps-xl-4 ps-xl-4 pb-2 pb-md-4 pb-md-4" style="background: #423F3E; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="row" id="short_info">
             {% for group in groups %}
                 <div class="col-xl-4 col-md-6 col-12">
-                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
+                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px ;background: #cacaca42">
                         <div class="card-body">
                             <p style="font-size: xx-large; font-weight: 600;">{{ group.group.metaData.groupName }}</p>
                             <div class="table-responsive">
@@ -48,7 +48,7 @@
         <div class="row d-none" id="long_info">
             {% for group in groups %}
                 <div class="col-12">
-                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px">
+                    <div class="card" style="margin: 2rem 0 2rem 0; border-radius: 10px;background: #cacaca42">
                         <div class="card-body">
                             <p style="font-size: xx-large; font-weight: 600; text-align: left; margin-bottom: 2rem">{{ group.group.metaData.groupName }}</p>
                             <div class="table-responsive">

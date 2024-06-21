@@ -3,7 +3,7 @@
 {% block content %}
     {% load mathfilters %}
 
-    <div class="container text-center" style="background: #3e3e3e; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="container text-center" style="background: #423F3E; padding: 0 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
         <div class="row">
             {% if lineup.lineupStatus == 'TACTICAL_AVAILABLE' %}
             <div class="col-xl-4 col-md-12 col-12">
@@ -78,7 +78,7 @@
                                     <img src="{{lineup.homeTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.homeTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.homeTeam.shirtColor }}, -1px 0 {{ lineup.homeTeam.shirtColor }}, 0 1px {{ lineup.homeTeam.shirtColor }}, 0 -1px {{ lineup.homeTeam.shirtColor }}, 1px 1px {{ lineup.homeTeam.shirtColor }}, -1px -1px {{ lineup.homeTeam.shirtColor }}, 1px -1px {{ lineup.homeTeam.shirtColor }}, -1px 1px {{ lineup.homeTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
-                                <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
+                                <p style="margin-left: 10px; font-size: medium; margin-bottom: 0;">
                                     {{player.player.nationalShirtName|title}}
                                     {% if player.type == 'GOALKEEPER' %}
                                         (GK)
@@ -98,7 +98,7 @@
                                     <img src="{{lineup.awayTeam.kitImageUrl}}" style="height: 2rem; filter: drop-shadow(0px 2px 5px #000000);">
                                     <p style="color: {{ lineup.awayTeam.textColor }}; margin-bottom: 0; position: absolute; top: 20%; left: 50%; transform: translate(-50%); font-size: 13px; font-weight: 600;  text-shadow: 1px 0 {{ lineup.awayTeam.shirtColor }}, -1px 0 {{ lineup.awayTeam.shirtColor }}, 0 1px {{ lineup.awayTeam.shirtColor }}, 0 -1px {{ lineup.awayTeam.shirtColor }}, 1px 1px {{ lineup.awayTeam.shirtColor }}, -1px -1px {{ lineup.awayTeam.shirtColor }}, 1px -1px {{ lineup.awayTeam.shirtColor }}, -1px 1px {{ lineup.awayTeam.shirtColor }}; ">{{player.jerseyNumber}}</p>
                                 </div>
-                                <p style="margin-left: 10px; font-size: medium; color: black; margin-bottom: 0;">
+                                <p style="margin-left: 10px; font-size: medium; margin-bottom: 0;">
                                     {{player.player.nationalShirtName|title}}
                                     {% if player.type == 'GOALKEEPER' %}
                                         (GK)
@@ -112,7 +112,7 @@
             <div class="col">
                 <div style="display: flex; margin-top: 3rem; justify-content: center">
                     <div style="">
-                        <p style="margin-bottom: 0.5rem; color: grey">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
+                        <p style="margin-bottom: 0.5rem; color: whitesmoke">{{match.stadium.city.translations.name.EN}} - {{match.stadium.address}}</p>
                         <img src="{{match.stadium.images.MEDIUM_WIDE}}" style="max-height: 12rem;">
                     </div>
                     {% if match.condition %}
@@ -122,7 +122,7 @@
                                 display: flex;
                                 align-items: center;">
                         <div style="font-size: 5rem; font-family: monospace;">{{match.condition.temperature}}&deg;</div>
-                        <div style="margin-left: 0.75rem; text-align: left; color: darkslategrey;">
+                        <div style="margin-left: 0.75rem; text-align: left; color: #d4d4d4;">
                             <p><b>{{match.condition.translations.weatherConditionName.EN|title}}</b></p>
                             <p>The pitch is {{match.condition.pitchCondition|lower}}</p>
                             <p>Humidity: {{match.condition.humidity}}%</p>
@@ -141,17 +141,17 @@
                         </div> 
                         {% if match.status == 'LIVE' %}
                             <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
-                                <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                                <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
                                     {{match.score.total.home}} - {{match.score.total.away}} </div>
                             </div> 
                         {% elif match.status == 'UPCOMING' %}
                         <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
-                            <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                            <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
                                 0 - 0 </div>
                         </div> 
                         {% elif match.status == 'FINISHED' %}
                         <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
-                            <div style="padding: 0 0.75rem 0 0.75rem; background: #ffd970; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
+                            <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
                                 {{match.score.total.home}} - {{match.score.total.away}} </div>
                         </div> 
                         {% endif %} 
@@ -258,7 +258,7 @@
                     <div style="border-top: solid 1px #d6d6d6; width: 100%; margin: 3rem 0 2rem 0"></div>
                     
                         {% if match.playerOfTheMatch %}
-                            <div style="background: #20399a;
+                            <div style="background: #362222;
                                 padding: 1rem;
                                 border-radius: 1rem;
                                 margin-bottom: 2rem">
@@ -319,7 +319,7 @@
                                 <div class="col-4">
                                     {{stat.homeTeamValue}}
                                 </div>
-                                <div class="col-4" style="color: grey">
+                                <div class="col-4">
                                     {{stat.nameDisplay}}
                                 </div>
                                 <div class="col-4">

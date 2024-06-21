@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container text-center" style="background: whitesmoke; padding: 2rem 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+<div class="container text-center" style="background: #423F3E; padding: 2rem 2rem 2rem 2rem; border-radius: 1rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div style="width: 100%; overflow-x: scroll;">
     <div class="row" style="margin-bottom: 1.5rem; min-width: 945px; width: 100%;">
         <div class="col">
@@ -22,7 +22,7 @@
             {% for match in round16 %}
                 <div style="margin-bottom: 1rem; align-content: center;">
                     <div class="match-tag">
-                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
                             <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
                             <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
@@ -40,7 +40,7 @@
                 <div style="margin-bottom: 1rem; align-content: center; position: relative;">
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
-                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
                             <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
                             <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
@@ -58,7 +58,7 @@
                 <div style="margin-bottom: 1rem; align-content: center; position: relative;">
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
-                        <p style="font-size: 13px; color: grey">{{match.kickOffTime.timeBraket}}</p>
+                        <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
                             <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
                             <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
@@ -82,7 +82,7 @@
                     ">
                         <img loading="lazy" src="https://img.uefa.com/imgml/uefacom/euro2024/trophy/trophy_small.png?imwidth=700">
                     </div>
-                    <p style="font-size: 15px; color: grey">{{final.kickOffTime.timeBraket}}</p>
+                    <p style="font-size: 15px; ">{{final.kickOffTime.timeBraket}}</p>
                     <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
                         <img src="{{final.homeTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
                         <span style="margin-left: 10px; font-size: large;";>{{ final.homeTeam.internationalName }}</span>
@@ -100,9 +100,9 @@
     <div class="row">
         {% for match in matches %}
                 <div class="col-xl-6 col-md-12 col-12">
-                    <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px">
+                    <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px; background: #cacaca42;">
                         <div class="card-body">
-                            <p style="text-align: left; color: grey">{{ match.round.metaData.name}}</p>
+                            <p style="text-align: left;">{{ match.round.metaData.name}}</p>
                             <div style="display: flex; justify-content: space-between;">
                                 <div>
                                     <div style="display: flex; align-items: center; margin-bottom: 1rem">
