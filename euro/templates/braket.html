@@ -101,6 +101,7 @@
         {% for match in matches %}
                 <div class="col-xl-6 col-md-12 col-12">
                     <div class="card" style="margin: 2rem 0 0 0; border-radius: 0px; background: #cacaca42;">
+                        <a href="/matches/{{match.id}}" style="all: unset;">
                         <div class="card-body">
                             <p style="text-align: left;">{{ match.round.metaData.name}}</p>
                             <div style="display: flex; justify-content: space-between;">
@@ -169,6 +170,7 @@
                             </div>
                             
                         </div>
+                    </a>
                     </div>
                 </div>
             {% endfor %}
