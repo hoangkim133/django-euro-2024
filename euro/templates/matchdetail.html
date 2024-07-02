@@ -143,7 +143,11 @@
                             <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
                                 <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
                                     {{match.score.total.home}} - {{match.score.total.away}} </div>
-                            </div> 
+                                    {% if match.score.penalty %}
+                                <p style="font-weight: 100; font-size: medium; margin-bottom: 0.5rem; margin-top: -1rem">({{match.score.penalty.home}} - {{match.score.penalty.away}})</p>
+                            {% endif %}
+                                </div> 
+                            
                         {% elif match.status == 'UPCOMING' %}
                         <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
                             <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
@@ -152,7 +156,11 @@
                         {% elif match.status == 'FINISHED' %}
                         <div class="col-2" style="display: flex; justify-content: center; padding: 0;">
                             <div style="padding: 0 0.75rem 0 0.75rem; background: #be8b00; font-size: xxx-large; align-content: center; border-radius: 1rem; font-weight: 600; width: max-content;">
-                                {{match.score.total.home}} - {{match.score.total.away}} </div>
+                                {{match.score.total.home}} - {{match.score.total.away}}
+                                {% if match.score.penalty %}
+                                <p style="font-weight: 100; font-size: medium; margin-bottom: 0.5rem; margin-top: -1rem">({{match.score.penalty.home}} - {{match.score.penalty.away}})</p>
+                            {% endif %}
+                            </div>
                         </div> 
                         {% endif %} 
                         <div class="col-5" style="display: flex; justify-content: flex-start; font-size: xxx-large; align-items: center">

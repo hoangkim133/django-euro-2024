@@ -128,13 +128,23 @@
                                 <div style="display: flex">
                                     {% if match.status == 'LIVE' %}
                                     <div style="background: #ffcd44; padding: 0.5rem; border-radius: 0.25rem; display: grid; font-size: x-large; font-weight: 700; align-items: center; margin-right: 2rem">
-                                        <p>{{match.score.regular.home}}</p>
-                                        <p style="margin-bottom: 0">{{match.score.regular.away}}</p>
+                                        {% if match.score.penalty %}
+                                            <p><span style="font-weight: 100">({{match.score.penalty.home}})</span>  {{match.score.total.home}} </p>
+                                            <p style="margin-bottom: 0"><span style="font-weight: 100">({{match.score.penalty.away}})</span> {{match.score.total.away}}</p>
+                                        {% else %}
+                                            <p>{{match.score.total.home}}</p>
+                                            <p style="margin-bottom: 0">{{match.score.total.away}}</p>
+                                        {% endif %}
                                     </div>
                                     {% elif match.status == 'FINISHED' %}
                                     <div style="background: transparent; padding: 0.5rem; border-radius: 0.25rem; display: grid; font-size: x-large; font-weight: 700; align-items: center; margin-right: 2rem">
-                                        <p>{{match.score.regular.home}}</p>
-                                        <p style="margin-bottom: 0">{{match.score.regular.away}}</p>
+                                        {% if match.score.penalty %}
+                                            <p><span style="font-weight: 100">({{match.score.penalty.home}})</span>  {{match.score.total.home}} </p>
+                                            <p style="margin-bottom: 0"><span style="font-weight: 100">({{match.score.penalty.away}})</span> {{match.score.total.away}}</p>
+                                        {% else %}
+                                            <p>{{match.score.total.home}}</p>
+                                            <p style="margin-bottom: 0">{{match.score.total.away}}</p>
+                                        {% endif %}
                                     </div>
                                     {% else %}
                                         
