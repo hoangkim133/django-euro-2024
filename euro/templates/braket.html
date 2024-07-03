@@ -23,13 +23,31 @@
                 <div style="margin-bottom: 1rem; align-content: center;">
                     <div class="match-tag">
                         <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
-                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
-                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.home}}) <b>{{match.score.total.home}}</b></span>  
+                                {% else %}
+                                    <span>{{match.score.total.home}}</span>
+                                {% endif %}
+                            </div> 
                         </div> 
-                        <div style="display: flex; align-items: center;">
-                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span> 
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.away}}) <b>{{match.score.total.away}}</b></span> 
+                                {% else %}
+                                    <span style="margin-bottom: 0">{{match.score.total.away}}</span>
+                                {% endif %}
+                            </div> 
                         </div>  
                     </div>
                 </div>
@@ -41,13 +59,31 @@
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
                         <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
-                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
-                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.home}}) <b>{{match.score.total.home}}</b></span>  
+                                {% else %}
+                                    <span>{{match.score.total.home}}</span>
+                                {% endif %}
+                            </div> 
                         </div> 
-                        <div style="display: flex; align-items: center;">
-                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span> 
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.away}}) <b>{{match.score.total.away}}</b></span> 
+                                {% else %}
+                                    <span style="margin-bottom: 0">{{match.score.total.away}}</span>
+                                {% endif %}
+                            </div> 
                         </div>  
                     </div>
                 </div>
@@ -59,14 +95,32 @@
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
                     <div class="match-tag">
                         <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
-                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
-                            <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.home}}) <b>{{match.score.total.home}}</b></span>  
+                                {% else %}
+                                    <span>{{match.score.total.home}}</span>
+                                {% endif %}
+                            </div> 
                         </div> 
-                        <div style="display: flex; align-items: center;">
-                            <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                            <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span>
-                        </div>  
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center;">
+                                <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span> 
+                            </div> 
+                            <div style="display: flex; align-items: center;">
+                                {% if match.score.penalty %}
+                                    <span style="font-weight: 100">({{match.score.penalty.away}}) <b>{{match.score.total.away}}</b></span> 
+                                {% else %}
+                                    <span style="margin-bottom: 0">{{match.score.total.away}}</span>
+                                {% endif %}
+                            </div> 
+                        </div> 
                     </div>
                 </div>
             {% endfor %}
@@ -83,14 +137,33 @@
                         <img loading="lazy" src="https://img.uefa.com/imgml/uefacom/euro2024/trophy/trophy_small.png?imwidth=700">
                     </div>
                     <p style="font-size: 15px; ">{{final.kickOffTime.timeBraket}}</p>
-                    <div style="display: flex; align-items: center; margin-bottom: 0.25rem">
-                        <img src="{{final.homeTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
-                        <span style="margin-left: 10px; font-size: large;";>{{ final.homeTeam.internationalName }}</span>
+                    <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{final.homeTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
+                            <span style="margin-left: 10px; font-size: large;";>{{ final.homeTeam.internationalName }}</span>
+                        </div> 
+                        <div style="display: flex; align-items: center;">
+                            {% if final.score.penalty %}
+                                <span style="font-weight: 100">({{final.score.penalty.home}}) <b>{{final.score.total.home}}</b></span>  
+                            {% else %}
+                                <span>{{final.score.total.home}}</span>
+                            {% endif %}
+                        </div> 
                     </div> 
-                    <div style="display: flex; align-items: center;">
-                        <img src="{{final.awayTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="{{final.awayTeam.logoUrl}}" style="height: 1.5rem" alt="logo">
                         <span style="margin-left: 10px; font-size: large;">{{ final.awayTeam.internationalName }}</span>
-                    </div>  
+                        </div> 
+                        <div style="display: flex; align-items: center;">
+                            {% if final.score.penalty %}
+                                <span style="font-weight: 100">({{final.score.penalty.away}}) <b>{{final.score.total.away}}</b></span> 
+                            {% else %}
+                                <span style="margin-bottom: 0">{{final.score.total.away}}</span>
+                            {% endif %}
+                        </div> 
+                    </div> 
+
                 </div>
             </div>
         </div>
