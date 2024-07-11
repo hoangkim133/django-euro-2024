@@ -21,35 +21,37 @@
         <div class="col" style="display: grid">
             {% for match in round16 %}
                 <div style="margin-bottom: 1rem; align-content: center;">
-                    <div class="match-tag">
-                        <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
-                        <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
-                            <div style="display: flex; align-items: center;">
-                                <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                                <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                    <a href="/matches/{{match.id}}" style="all: unset;">
+                        <div class="match-tag">
+                            <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
+                            <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
+                                <div style="display: flex; align-items: center;">
+                                    <img src="{{match.homeTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                    <span style="margin-left: 10px; font-size: medium;";>{{ match.homeTeam.internationalName }}</span>
+                                </div> 
+                                <div style="display: flex; align-items: center;">
+                                    {% if match.score.penalty %}
+                                        <span style="font-weight: 100">({{match.score.penalty.home}}) <b>{{match.score.total.home}}</b></span>  
+                                    {% else %}
+                                        <span>{{match.score.total.home}}</span>
+                                    {% endif %}
+                                </div> 
                             </div> 
-                            <div style="display: flex; align-items: center;">
-                                {% if match.score.penalty %}
-                                    <span style="font-weight: 100">({{match.score.penalty.home}}) <b>{{match.score.total.home}}</b></span>  
-                                {% else %}
-                                    <span>{{match.score.total.home}}</span>
-                                {% endif %}
-                            </div> 
-                        </div> 
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div style="display: flex; align-items: center;">
-                                <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
-                                <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span> 
-                            </div> 
-                            <div style="display: flex; align-items: center;">
-                                {% if match.score.penalty %}
-                                    <span style="font-weight: 100">({{match.score.penalty.away}}) <b>{{match.score.total.away}}</b></span> 
-                                {% else %}
-                                    <span style="margin-bottom: 0">{{match.score.total.away}}</span>
-                                {% endif %}
-                            </div> 
-                        </div>  
-                    </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center;">
+                                    <img src="{{match.awayTeam.logoUrl}}" style="height: 1rem" alt="logo">
+                                    <span style="margin-left: 10px; font-size: large;">{{ match.awayTeam.internationalName }}</span> 
+                                </div> 
+                                <div style="display: flex; align-items: center;">
+                                    {% if match.score.penalty %}
+                                        <span style="font-weight: 100">({{match.score.penalty.away}}) <b>{{match.score.total.away}}</b></span> 
+                                    {% else %}
+                                        <span style="margin-bottom: 0">{{match.score.total.away}}</span>
+                                    {% endif %}
+                                </div> 
+                            </div>  
+                        </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
@@ -57,6 +59,8 @@
             {% for match in quarter %}
                 <div style="margin-bottom: 1rem; align-content: center; position: relative;">
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
+                    <a href="/matches/{{match.id}}" style="all: unset;">
+
                     <div class="match-tag">
                         <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
@@ -86,6 +90,7 @@
                             </div> 
                         </div>  
                     </div>
+                </a>
                 </div>
             {% endfor %}
         </div>
@@ -93,6 +98,8 @@
             {% for match in semi %}
                 <div style="margin-bottom: 1rem; align-content: center; position: relative;">
                     <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
+                    <a href="/matches/{{match.id}}" style="all: unset;">
+
                     <div class="match-tag">
                         <p style="font-size: 13px;">{{match.kickOffTime.timeBraket}}</p>
                         <div style="display: flex; align-items: center; margin-bottom: 0.25rem; justify-content: space-between;">
@@ -122,12 +129,15 @@
                             </div> 
                         </div> 
                     </div>
+                </a>
                 </div>
             {% endfor %}
         </div>
         <div class="col" style="display: grid">
             <div style="margin-bottom: 1rem; align-content: center; position: relative;">
                 <div class="braket-line"><div class="braket-line-row"></div><div class="braket-line-col"></div></div>
+                <a href="/matches/{{final.id}}" style="all: unset;">
+
                 <div class="match-tag" style="position: relative;">
                     <div style="
                         position: absolute;
@@ -165,6 +175,7 @@
                     </div> 
 
                 </div>
+            </a>
             </div>
         </div>
     </div>
