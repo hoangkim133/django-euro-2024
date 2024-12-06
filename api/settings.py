@@ -133,6 +133,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://euro2024kh.vercel.app/',  # Thêm domain của bạn vào đây
-]
+CORS_ALLOW_ALL_ORIGINS = True
