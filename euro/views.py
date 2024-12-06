@@ -225,8 +225,6 @@ def getBraketview(request):
 
     return render(request, 'braket.html', {'final': final, 'semi': semi, 'quarter': quarter, 'round16': round16, 'matches': braket[::-1]})
 
-
-@csrf_exempt
 def send_gg(request):
     if request.method == 'POST':
         try:
