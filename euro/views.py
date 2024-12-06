@@ -1,6 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+import os
 from . import service
+from googleapiclient.discovery import build
+from google.oauth2.service_account import Credentials
 
 # Create your views here.
 country_to_flag = {
@@ -218,3 +224,90 @@ def getBraketview(request):
     final = braket[0]
 
     return render(request, 'braket.html', {'final': final, 'semi': semi, 'quarter': quarter, 'round16': round16, 'matches': braket[::-1]})
+
+
+@csrf_exempt
+def send_gg(request):
+    if request.method == 'POST':
+        try:
+            # Lấy dữ liệu từ body request
+            data = json.loads(request.body)
+
+            label = data.get('label')
+            order_id = data.get('order_id')
+            source = data.get('source')
+
+            SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
+            RANGE = 'Sheet1!A1:C3'
+            VALUES = [
+                ["Label", "Order ID", "Source"],
+                [label, order_id, source]
+            ]
+
+            # Gọi hàm để chèn dữ liệu vào Google Sheet
+            insert_to_google_sheet(SPREADSHEET_ID, RANGE, VALUES)
+
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Data saved successfully!',
+                'data': {
+                    'label': label,
+                    'order_id': order_id,
+                    'source': source
+                }
+            }, status=201)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+
+
+def insert_to_google_sheet(spreadsheet_id, range_, values):
+    """
+    Hàm chèn dữ liệu vào Google Sheet.
+
+    :param service_account_file: Đường dẫn đến file Service Account JSON.
+    :param spreadsheet_id: ID của Google Sheet (có thể lấy từ URL).
+    :param range_: Range trong Google Sheet (ví dụ: 'Sheet1!A1:C3').
+    :param values: Dữ liệu cần chèn vào sheet (dạng list 2D).
+    """
+    cre = {
+        "type": "service_account",
+        "project_id": "gen-lang-client-0910549839",
+        "private_key_id": "e83bee060c67ac98ee9a398fa60ba0892b916c7c",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDcwSYbeLKrGh0z\nTMQ0xQK+C8r1bVQ04ARZ8D4g08sERYWO/s+zIJ4L3D+AgEI/Di4ASPfDPgDO6iib\nvVRkT9IPErNWJH9uQAa9/Wx+VmDBFIdux46I62qEEIgpbq7Zy102/wIesBMgMDd9\ntfJW89Pw/3+0nTUsqfdY8G6d8scHH7wZZPGShxCgnbsGc7tslR3FeM7nNYr0iPol\nk0NC4YBiQ69ZoAMa9I3/zMMwF/+QGmJE3jnG07seUsbUPwyZ8uqQ0nYsskVx+Tdq\nQx1qQfDihzMlZMQPI7NppJQLw2lVuOjAsN9bjVAW4Uei2T9ULBVaH6LTqvxxBXku\nAqoxa/QDAgMBAAECggEAUpaGUbfFrEKwUv1w2Ecuf/g8fbZhzwhSSG2baL+jz9zM\nm1NUVDErP8euED6ryhhdeGjUHLzJI6AyAhYCiSbdsRrvchZkgFQ+0XyKxvc86m9q\nPbU1656bcn4W2t1YWA3/uTANVHrOJPg1Anh8CjDdhWepGOLJvoR2D9WfpMLr2AtC\n+EWAJ26Ra5Us8qZCQ8qIsgn3BIkM6raeQZQ3le/wzPg5Oz0Q2/p8eOj+w4V0AhWW\nshUH7LuBOQtGc5Nyvm2jKgskTRSl7FrZD0aEFrgWprlXRr+2f1xYd0LDjpChNmsD\ndB5acAIpsejfmxLAIL4KDenDSHGu79ZJUS1Vi5WOoQKBgQDxN5eKA3eQWZW/DbIU\nmLoBiFs88N+onsycY0NJa9aojfj3FEv+uCjTCndQ71NxHtScY7jZP1N36nSr/UhJ\n0osIaWInghjx/NfLwLcR2SdLItqtLaDdiZEtPX4N6dchwn788wNXcnn+tRESGwxt\nZ91ynRNEtyh/+DvNDLhoQNvaowKBgQDqSIWsy2BecQeM9rvjmsrNLDsHdLVlAKFM\nS1NyJVsDNoQneAhCwAf8g4q1sR3v5jY5JxFR1KlVQTdwW+qpWIBwnZ5GnS7CSNYq\n0QuARQtI5I6iu2vJFmmyLjnSLUKShVJSwv5QJWCAZx3eq+rWCB7ZUzQgEXagWjlv\n/rPN5fF3IQKBgGsoYR+krqbnxUhckzHnLyqjIrUN5K4J7afDyQ6C45d5ipJo5+G+\nehRW3+6Kgy0LnzPicSnBohjxhOcq28Q/zhfsiPg4KVDHHC6d7DX3nCca0r6AOKhy\nBpZsbOVNbo7G0pcYdfGRH3TxhyXd8kVgENZrxTWPkGRZKGfNMNbPiVu1AoGBAMWK\njsPq2//luCMgq74294bWI5Oe0ZAvXtGwtdSKMNpdrkKFUBnQRyugUmXuyLpN1yyL\nh2wDLyBGlBM2PX+6stnB3QHXaOTCe2qwxszJ6sD0jlwiQbjVIBvwJCrWpMpchdRo\nu/wh9+NsjuAA/0qmoDRIlqvvbaG5UbLgBQW4O8hhAoGBAKlpFGXbQTPRM5sNr1Kh\nFi7mIbnwnhxKITSVHkA9xLZh66kLKrSlGLtqYMkPyB9/HO45gxUdsuwsPE03VNMQ\nDVtJU4wlgRGAlpYcq0WpO+pD/ADElymrCGDK6rLUvVQot9hvxdNVkWlkJGj1rZZT\n/QU8Qb3SrjYHfJs0fRhnfyke\n-----END PRIVATE KEY-----\n",
+        "client_email": "extention@gen-lang-client-0910549839.iam.gserviceaccount.com",
+        "client_id": "102765713177686785372",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/extention%40gen-lang-client-0910549839.iam.gserviceaccount.com",
+        "universe_domain": "googleapis.com"
+    }
+
+    # Sử dụng service account để xác thực
+    credentials = Credentials.from_service_account_info(
+        cre,
+        scopes=["https://www.googleapis.com/auth/spreadsheets"]
+    )
+    # Build Google Sheets API client
+    service = build('sheets', 'v4', credentials=credentials)
+
+    # Cấu trúc body của yêu cầu
+    body = {
+        'values': values
+    }
+
+    try:
+        # Chèn dữ liệu vào Google Sheets
+        result = service.spreadsheets().values().update(
+            spreadsheetId=spreadsheet_id,
+            range=range_,
+            valueInputOption="RAW",  # Hoặc "USER_ENTERED"
+            body=body
+        ).execute()
+
+        print(f"{result.get('updatedCells')} cells updated.")
+    except Exception as e:
+        print(f"Error: {e}")
