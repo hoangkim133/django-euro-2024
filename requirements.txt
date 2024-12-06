@@ -3,3 +3,5 @@ python-dotenv==1.0.1
 Requests==2.32.3
 django-bootstrap-v5==1.0.11
 django-mathfilters==1.0.0
+google-api-python-client==2.151.0
+google==3.0.0
