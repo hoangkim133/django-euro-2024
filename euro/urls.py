@@ -10,3 +10,4 @@ urlpatterns = [
     path('stats', views.getStats),
     path('send_data', views.send_gg),
 ]
+
