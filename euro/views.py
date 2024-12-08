@@ -237,11 +237,11 @@ def send_gg(request):
             label = data.get('label')
             order_id = data.get('order_id')
             source = data.get('source')
-
+            print(str(now))
             SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
-            RANGE = 'Sheet1!B2:C3'
+            RANGE = 'Sheet1!B:B'
             VALUES = [
-                [str(now),label, order_id, source]
+                [None, str(now), label, order_id, source]
             ]
 
             # Gọi hàm để chèn dữ liệu vào Google Sheet
@@ -275,7 +275,7 @@ def insert_to_google_sheet(spreadsheet_id, range_, values):
     """
 
     cre = os.environ.get("CRE")
-    print(type(cre))
+
     # Sử dụng service account để xác thực
     credentials = Credentials.from_service_account_info(
         json.loads(cre),
