@@ -7,6 +7,7 @@ import os
 from . import service
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 # Create your views here.
 country_to_flag = {
@@ -231,15 +232,16 @@ def send_gg(request):
         try:
             # Lấy dữ liệu từ body request
             data = json.loads(request.body)
+            now = datetime.now()
 
             label = data.get('label')
             order_id = data.get('order_id')
             source = data.get('source')
 
             SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
-            RANGE = 'Sheet1!A1:C3'
+            RANGE = 'Sheet1!B2:C3'
             VALUES = [
-                [label, order_id, source]
+                [now,label, order_id, source]
             ]
 
             # Gọi hàm để chèn dữ liệu vào Google Sheet
