@@ -241,7 +241,7 @@ def send_gg(request):
             SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
             RANGE = 'Sheet1!B2:C3'
             VALUES = [
-                [now,label, order_id, source]
+                [json.dumps(now),label, order_id, source]
             ]
 
             # Gọi hàm để chèn dữ liệu vào Google Sheet
