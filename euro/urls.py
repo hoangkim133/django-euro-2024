@@ -9,5 +9,5 @@ urlpatterns = [
     path('teams', views.getTeam),
     path('stats', views.getStats),
     path('send_data', views.send_gg),
+    path('get_data', views.get_request_gg),
 ]
-

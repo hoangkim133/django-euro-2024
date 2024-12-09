@@ -227,6 +227,52 @@ def getBraketview(request):
     return render(request, 'braket.html', {'final': final, 'semi': semi, 'quarter': quarter, 'round16': round16, 'matches': braket[::-1]})
 
 
+SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
+
+
+def get_request_gg(request):
+    if request.method == "GET":
+        """
+        Lấy dữ liệu từ Google Sheet.
+
+        :param spreadsheet_id: ID của Google Sheet (có thể lấy từ URL).
+        :param range_: Range cần lấy dữ liệu (ví dụ: 'Sheet1!A1:C10').
+        :return: Dữ liệu lấy được (dạng list 2D) hoặc None nếu xảy ra lỗi.
+        """
+        # Lấy Google Sheets service
+        service = get_google_sheets_service()
+
+        try:
+            # Lấy dữ liệu từ Google Sheets
+            result = service.spreadsheets().values().get(
+                spreadsheetId=SPREADSHEET_ID,
+                range='yc!B4:C'
+            ).execute()
+
+            # Trả về danh sách giá trị hoặc rỗng
+            data = result.get('values', [])
+            if data:
+                # Chuyển dữ liệu thành hai mảng, loại bỏ null
+                col_b = [row[0] for row in data if len(row) > 0 and row[0]] 
+                col_c = [row[1] for row in data if len(row) > 1 and row[1]]
+
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Data fetched successfully!',
+                    'data': {
+                        'employ': col_b,
+                        'channel': col_c
+                    }
+                }, status=200)
+
+            return JsonResponse({'status': 'error', 'message': 'Failed to fetch data'}, status=400)
+
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': f'Error: {e}'}, status=500)
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+
+
 def send_gg(request):
     if request.method == 'POST':
         try:
@@ -234,14 +280,14 @@ def send_gg(request):
             data = json.loads(request.body)
             now = datetime.now()
 
-            label = data.get('label')
+            employee = data.get('label')
             order_id = data.get('order_id')
             source = data.get('source')
+            info = data.get('info')
             print(str(now))
-            SPREADSHEET_ID = '1mRjM0eLr41McMARa6xiEwBsmchfxulIaD1EbqmpUy1Q'
             RANGE = 'Sheet1!B:B'
             VALUES = [
-                [None, str(now), label, order_id, source]
+                [None, str(now), employee, source, order_id, info]
             ]
 
             # Gọi hàm để chèn dữ liệu vào Google Sheet
@@ -250,9 +296,10 @@ def send_gg(request):
                     'status': 'success',
                     'message': 'Data saved successfully!',
                     'data': {
-                        'label': label,
+                        'employee': employee,
+                        'source': source,
                         'order_id': order_id,
-                        'source': source
+                        'info': info
                     }
                 }, status=201)
 
@@ -264,25 +311,46 @@ def send_gg(request):
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
 
+# Biến toàn cục lưu trữ service
+_google_sheets_service = None
+
+
+def get_google_sheets_service():
+    """
+    Khởi tạo Google Sheets API service nếu chưa có và tái sử dụng.
+    """
+    global _google_sheets_service
+
+    if _google_sheets_service is None:
+        try:
+            # Lấy thông tin Service Account từ biến môi trường
+            cre = os.environ.get("CRE")
+            credentials = Credentials.from_service_account_info(
+                json.loads(cre),
+                scopes=["https://www.googleapis.com/auth/spreadsheets"]
+            )
+
+            # Khởi tạo Google Sheets API service
+            _google_sheets_service = build(
+                'sheets', 'v4', credentials=credentials)
+
+        except Exception as e:
+            print(f"Lỗi khi khởi tạo Google Sheets API service: {e}")
+            raise e
+
+    return _google_sheets_service
+
+
 def insert_to_google_sheet(spreadsheet_id, range_, values):
     """
-    Hàm chèn dữ liệu vào Google Sheet.
+    Chèn dữ liệu vào Google Sheet.
 
-    :param service_account_file: Đường dẫn đến file Service Account JSON.
     :param spreadsheet_id: ID của Google Sheet (có thể lấy từ URL).
     :param range_: Range trong Google Sheet (ví dụ: 'Sheet1!A1:C3').
     :param values: Dữ liệu cần chèn vào sheet (dạng list 2D).
     """
-
-    cre = os.environ.get("CRE")
-
-    # Sử dụng service account để xác thực
-    credentials = Credentials.from_service_account_info(
-        json.loads(cre),
-        scopes=["https://www.googleapis.com/auth/spreadsheets"]
-    )
-    # Build Google Sheets API client
-    service = build('sheets', 'v4', credentials=credentials)
+    # Lấy Google Sheets service
+    service = get_google_sheets_service()
 
     # Cấu trúc body của yêu cầu
     body = {
@@ -298,7 +366,8 @@ def insert_to_google_sheet(spreadsheet_id, range_, values):
             body=body
         ).execute()
 
+        print(f"Đã chèn dữ liệu: {result}")
         return True
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Lỗi khi chèn dữ liệu vào Google Sheets: {e}")
         return False
