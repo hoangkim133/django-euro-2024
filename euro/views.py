@@ -280,7 +280,7 @@ def send_gg(request):
             data = json.loads(request.body)
             now = datetime.now()
 
-            employee = data.get('label')
+            employee = data.get('employee')
             order_id = data.get('order_id')
             source = data.get('source')
             info = data.get('info')
